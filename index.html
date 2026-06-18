@@ -8,11 +8,11 @@
         <!-- SEO -->
         <meta
             name="description"
-            content="Monomail is a pure black-and-white Gmail client for Android built with Jetpack Compose and Material 3. Multi-account, offline-first, no colour, no clutter."
+            content="Monomail is a pure black-and-white email client for Gmail and Outlook on Android built with Jetpack Compose and Material 3. Multi-account, offline-first, no colour, no clutter."
         />
         <meta
             name="keywords"
-            content="Monomail, Android email app, Gmail client, Jetpack Compose, Material 3, monochrome, open source, offline email"
+            content="Monomail, Android email app, Gmail client, Outlook client, Jetpack Compose, Material 3, monochrome, open source, offline email"
         />
         <meta name="author" content="Shrivatsav" />
         <link rel="canonical" href="https://monomail.millosaurs.me/" />
@@ -23,7 +23,7 @@
         <meta property="og:title" content="Monomail — Your inbox, distilled." />
         <meta
             property="og:description"
-            content="A pure black-and-white Gmail client for Android. Multi-account, offline-first, Smart Grouping, Material 3 Expressive. Free and open source."
+            content="A pure black-and-white email client for Gmail and Outlook on Android. Multi-account, offline-first, Smart Grouping, Material 3 Expressive. Free and open source."
         />
         <meta property="og:url" content="https://monomail.millosaurs.me/" />
         <meta
@@ -46,7 +46,7 @@
         />
         <meta
             name="twitter:description"
-            content="A pure black-and-white Gmail client for Android. Multi-account, offline-first, Smart Grouping, Material 3 Expressive. Free and open source."
+            content="A pure black-and-white email client for Gmail and Outlook on Android. Multi-account, offline-first, Smart Grouping, Material 3 Expressive. Free and open source."
         />
         <meta
             name="twitter:image"
@@ -526,21 +526,45 @@
             /* ── FEATURES ── */
             .features-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
             }
             .feat-card {
                 background: var(--white);
                 border-radius: var(--r-card);
-                padding: 28px 26px;
+                padding: 32px;
                 border: 1.5px solid var(--border);
                 transition:
                     border-color 0.2s,
-                    transform 0.2s;
+                    transform 0.2s,
+                    box-shadow 0.2s;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
             }
             .feat-card:hover {
                 border-color: var(--black);
-                transform: translateY(-3px);
+                transform: translateY(-4px);
+                box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            }
+            .feat-span-2 {
+                grid-column: span 2;
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .feat-span-2 .feat-icon {
+                margin-bottom: 0;
+                margin-right: 24px;
+                width: 56px;
+                height: 56px;
+                flex-shrink: 0;
+            }
+            .feat-span-2 .feat-text-wrap {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: 56px;
             }
             .feat-icon {
                 width: 48px;
@@ -550,19 +574,50 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-bottom: 22px;
+                margin-bottom: 24px;
+                flex-shrink: 0;
             }
             .feat-name {
                 font-family: var(--font-d);
                 font-size: 19px;
                 font-weight: 700;
                 letter-spacing: -0.3px;
-                margin-bottom: 8px;
+                margin-bottom: 10px;
             }
             .feat-desc {
                 font-size: 14px;
                 color: var(--muted);
                 line-height: 1.6;
+            }
+
+            .minor-title {
+                font-family: var(--font-d);
+                font-size: 20px;
+                font-weight: 700;
+                margin-top: 56px;
+                margin-bottom: 24px;
+                text-align: left;
+                letter-spacing: -0.2px;
+            }
+            .features-list {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+                text-align: left;
+            }
+            .feat-list-item {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                font-size: 15px;
+                color: var(--black);
+                font-weight: 500;
+                background: rgba(0,0,0,0.04);
+                padding: 16px 20px;
+                border-radius: 12px;
+            }
+            .feat-list-item svg {
+                flex-shrink: 0;
             }
 
             /* ── OPEN SOURCE ── */
@@ -1033,6 +1088,19 @@
                 .features-grid {
                     grid-template-columns: 1fr;
                 }
+                .features-list {
+                    grid-template-columns: 1fr;
+                }
+                .feat-span-2 {
+                    grid-column: span 1;
+                    flex-direction: column;
+                }
+                .feat-span-2 .feat-icon {
+                    margin-bottom: 24px;
+                    margin-right: 0;
+                    width: 48px;
+                    height: 48px;
+                }
                 .new-grid {
                     grid-template-columns: 1fr;
                 }
@@ -1186,9 +1254,9 @@
                     ><span class="title-mail">Mail.</span>
                 </h1>
                 <p class="hero-sub">
-                    Your inbox, distilled. A pure black-and-white Gmail client
-                    built with Jetpack Compose. No noise, no colour, no clutter
-                    — just email.
+                    Your inbox, distilled. A pure black-and-white email client for
+                    Gmail and Outlook built with Jetpack Compose. No noise, no colour,
+                    no clutter — just email.
                 </p>
                 <div class="hero-actions">
                     <a
@@ -1249,7 +1317,7 @@
                 </div>
                 <div class="hero-meta">
                     <div class="meta-item">
-                        <span class="meta-num">v1.2.5</span
+                        <span class="meta-num">v1.3.2</span
                         ><span class="meta-lbl">Latest release</span>
                     </div>
                     <div class="meta-item">
@@ -1276,165 +1344,86 @@
             <div class="whats-new-inner">
                 <div class="whats-new-header">
                     <h2 class="whats-new-title">What's new</h2>
-                    <span class="version-pill">v1.2.5</span>
+                    <span class="version-pill">v1.3.2</span>
                 </div>
                 <div class="new-grid">
                     <div class="new-card">
                         <div class="new-card-icon">
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#aaa"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="M3 6h18M3 12h18M3 18h18" />
-                                <rect x="2" y="4" width="4" height="4" rx="1" />
-                                <rect
-                                    x="2"
-                                    y="10"
-                                    width="4"
-                                    height="4"
-                                    rx="1"
-                                />
-                                <rect
-                                    x="2"
-                                    y="16"
-                                    width="4"
-                                    height="4"
-                                    rx="1"
-                                />
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="18" width="18" height="3" rx="1" />
+                                <rect x="3" y="3" width="18" height="12" rx="2" />
                             </svg>
                         </div>
-                        <div class="new-card-name">Smart Grouping</div>
+                        <div class="new-card-name">Redesigned Dock</div>
                         <p class="new-card-desc">
-                            Frequent senders like Reddit and GitHub are
-                            automatically collapsed into expandable folders,
-                            keeping your inbox focused.
+                            All-new animated dock with smoother tab switching. Includes a new Appearance setting to scale the navigation size.
                         </p>
                     </div>
                     <div class="new-card">
                         <div class="new-card-icon">
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#aaa"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <rect
-                                    x="3"
-                                    y="3"
-                                    width="18"
-                                    height="18"
-                                    rx="3"
-                                />
-                                <path d="M3 9h18M9 21V9" />
-                            </svg>
-                        </div>
-                        <div class="new-card-name">Redesigned Settings</div>
-                        <p class="new-card-desc">
-                            Grouped card-based sections replace the flat list —
-                            cleaner visual hierarchy, easier to navigate.
-                        </p>
-                    </div>
-                    <div class="new-card">
-                        <div class="new-card-icon">
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#aaa"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                            >
-                                <path d="M4 7h16M4 12h10M4 17h6" />
-                            </svg>
-                        </div>
-                        <div class="new-card-name">Live Font Size Preview</div>
-                        <p class="new-card-desc">
-                            See real-time text scaling in Settings before you
-                            apply — no surprises after tapping confirm.
-                        </p>
-                    </div>
-                    <div class="new-card">
-                        <div class="new-card-icon">
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#aaa"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-                                <path
-                                    d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"
-                                />
-                            </svg>
-                        </div>
-                        <div class="new-card-name">M3 Modal Bottom Sheets</div>
-                        <p class="new-card-desc">
-                            All settings pickers now use Material 3 bottom
-                            sheets instead of dropdowns — proper mobile-native
-                            feel.
-                        </p>
-                    </div>
-                    <div class="new-card">
-                        <div class="new-card-icon">
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#aaa"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10" />
-                                <path d="M12 8v4l3 3" />
+                                <path d="M12 8v8" />
+                                <path d="M8 12h8" />
                             </svg>
                         </div>
-                        <div class="new-card-name">Spring Physics Modals</div>
+                        <div class="new-card-name">Dynamic Action Button</div>
                         <p class="new-card-desc">
-                            Profile, account switch, and add account modals now
-                            scale in from centre with spring physics — no more
-                            slide-from-edge.
+                            The FAB intelligently changes based on your current folder, turning into a one-tap "Empty" button when in Trash.
                         </p>
                     </div>
                     <div class="new-card">
                         <div class="new-card-icon">
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#aaa"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="M12 3a9 9 0 0 0-9 9" />
-                                <path d="M3 12a9 9 0 0 0 9 9" />
-                                <path d="M12 21a9 9 0 0 0 9-9" />
-                                <path d="M21 12a9 9 0 0 0-9-9" />
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                             </svg>
                         </div>
-                        <div class="new-card-name">Blur Timing Fixes</div>
+                        <div class="new-card-name">Profile Swipe</div>
                         <p class="new-card-desc">
-                            80ms blur delay eliminates the one-frame background
-                            flash when opening modals. Every transition now
-                            feels intentional.
+                            Swipe horizontally on the profile avatar in the profile menu to quickly switch between your active accounts.
+                        </p>
+                    </div>
+                    <div class="new-card">
+                        <div class="new-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 7v6h6" />
+                                <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" />
+                            </svg>
+                        </div>
+                        <div class="new-card-name">Unified Undo Toast</div>
+                        <p class="new-card-desc">
+                            Archiving or deleting a conversation now shows a cleaner, more noticeable, and properly clickable undo bar.
+                        </p>
+                    </div>
+                    <div class="new-card">
+                        <div class="new-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
+                        </div>
+                        <div class="new-card-name">UI Improvements</div>
+                        <p class="new-card-desc">
+                            The app feels snappier with smoother scrolling, faster email detail HTML rendering, and cleaner transitions.
+                        </p>
+                    </div>
+                    <div class="new-card">
+                        <div class="new-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8 2v4" />
+                                <path d="M16 2v4" />
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M4 12H2" />
+                                <path d="M22 12h-2" />
+                                <path d="M4 16H2" />
+                                <path d="M22 16h-2" />
+                            </svg>
+                        </div>
+                        <div class="new-card-name">Squashed Bugs</div>
+                        <p class="new-card-desc">
+                            Sign-out now only affects the current account. Back navigation and auto account list updates have been fully fixed.
                         </p>
                     </div>
                 </div>
@@ -1491,367 +1480,140 @@
                     Everything you need. Nothing you don't.
                 </h2>
                 <div class="features-grid">
-                    <div class="feat-card">
+                    <!-- Row 1 -->
+                    <div class="feat-card feat-span-2">
                         <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <ellipse cx="12" cy="5" rx="9" ry="3" />
                                 <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                                 <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
                             </svg>
                         </div>
-                        <div class="feat-name">Offline-First</div>
-                        <p class="feat-desc">
-                            Built on Room Database. Changes apply instantly and
-                            sync with Gmail in the background — works without a
-                            connection.
-                        </p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
-                                <path d="M12 2a10 10 0 0110 10" />
-                                <path d="M12 6v6l4 2" />
-                                <polyline points="22,11 22,2 13,11" />
-                            </svg>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Offline-First</div>
+                            <p class="feat-desc">Built on Room Database. Changes apply instantly and sync with Gmail in the background — works without a connection.</p>
                         </div>
-                        <div class="feat-name">Background Sync</div>
-                        <p class="feat-desc">
-                            WorkManager keeps your inbox up to date.
-                            Notifications and status changes happen flawlessly
-                            behind the scenes.
-                        </p>
                     </div>
                     <div class="feat-card">
                         <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="11" cy="11" r="8" />
                                 <path d="m21 21-4.35-4.35" />
                             </svg>
                         </div>
-                        <div class="feat-name">Offline + Online Search</div>
-                        <p class="feat-desc">
-                            Fully integrated search that works offline and
-                            online, woven into navigation with a morphing
-                            SearchBar.
-                        </p>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Smart Search</div>
+                            <p class="feat-desc">Fully integrated search that works offline and online, woven into navigation with a morphing SearchBar.</p>
+                        </div>
                     </div>
                     <div class="feat-card">
                         <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
                                 <path d="M3 6h18M3 12h18M3 18h18" />
                                 <rect x="2" y="4" width="4" height="4" rx="1" />
-                                <rect
-                                    x="2"
-                                    y="10"
-                                    width="4"
-                                    height="4"
-                                    rx="1"
-                                />
-                                <rect
-                                    x="2"
-                                    y="16"
-                                    width="4"
-                                    height="4"
-                                    rx="1"
-                                />
+                                <rect x="2" y="10" width="4" height="4" rx="1" />
+                                <rect x="2" y="16" width="4" height="4" rx="1" />
                             </svg>
                         </div>
-                        <div class="feat-name">Smart Grouping</div>
-                        <p class="feat-desc">
-                            High-frequency senders are automatically collapsed
-                            into expandable folders with animated spring
-                            expand/collapse.
-                        </p>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Smart Grouping</div>
+                            <p class="feat-desc">High-frequency senders are collapsed into expandable folders with spring expand animations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="feat-card feat-span-2">
+                        <div class="feat-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
+                                <path d="M12 20h9" />
+                                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                            </svg>
+                        </div>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Compose &amp; Reply</div>
+                            <p class="feat-desc">Distraction-free compose with attachment support, confirm-before-send, and configurable reply defaults.</p>
+                        </div>
                     </div>
                     <div class="feat-card">
                         <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
                                 <path d="M9 18l6-6-6-6" />
                             </svg>
                         </div>
-                        <div class="feat-name">Swipe Gestures</div>
-                        <p class="feat-desc">
-                            Swipe right to Archive / Unarchive. Swipe left to
-                            Star / Unstar. Fluid, native-feeling, and
-                            configurable from Settings.
-                        </p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
-                                <polyline points="9,14 4,9 9,4" />
-                                <path d="M20 20v-7a4 4 0 00-4-4H4" />
-                            </svg>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Swipe Gestures</div>
+                            <p class="feat-desc">Swipe right to Archive / Unarchive. Swipe left to Star / Unstar. Fluid and native-feeling.</p>
                         </div>
-                        <div class="feat-name">Smart Undo</div>
-                        <p class="feat-desc">
-                            Accidentally archived or deleted? A morphing toast
-                            gives you 4 seconds to undo — without firing a
-                            network request.
-                        </p>
                     </div>
                     <div class="feat-card">
                         <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
-                                <rect
-                                    x="3"
-                                    y="3"
-                                    width="18"
-                                    height="18"
-                                    rx="4"
-                                />
-                                <path d="M3 9h18M9 21V9" />
-                            </svg>
-                        </div>
-                        <div class="feat-name">Redesigned Settings</div>
-                        <p class="feat-desc">
-                            Grouped card-based sections, M3 Modal Bottom Sheet
-                            pickers, and live font size preview before you apply
-                            changes.
-                        </p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
-                                <rect
-                                    x="1"
-                                    y="4"
-                                    width="22"
-                                    height="16"
-                                    rx="3"
-                                />
-                                <path d="M1 10h22" />
-                            </svg>
-                        </div>
-                        <div class="feat-name">Long Press Menu</div>
-                        <p class="feat-desc">
-                            Hold any email to Star, Archive, toggle Read/Unread,
-                            or Delete — in a clean contextual card with smooth
-                            animations.
-                        </p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
-                                <path d="M12 20h9" />
-                                <path
-                                    d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"
-                                />
-                            </svg>
-                        </div>
-                        <div class="feat-name">Compose &amp; Reply</div>
-                        <p class="feat-desc">
-                            Distraction-free compose with attachment support,
-                            confirm-before-send, and configurable reply
-                            defaults.
-                        </p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path
-                                    d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"
-                                />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                                <path d="M16 3.13a4 4 0 010 7.75" />
-                            </svg>
-                        </div>
-                        <div class="feat-name">Multiple Accounts</div>
-                        <p class="feat-desc">
-                            Add Gmail and Microsoft Outlook accounts and switch
-                            between them effortlessly. All your inboxes, one
-                            app.
-                        </p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <rect
-                                    x="2"
-                                    y="3"
-                                    width="20"
-                                    height="14"
-                                    rx="2"
-                                />
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
                                 <path d="M8 21h8" />
                                 <path d="M12 17v4" />
                                 <path d="M2 10h20" />
                             </svg>
                         </div>
-                        <div class="feat-name">Unified Inbox</div>
-                        <p class="feat-desc">
-                            See all your accounts in one merged feed. One
-                            scroll, every email — no context switching.
-                        </p>
-                    </div>
-                    <div class="feat-card">
-                        <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
-                                <path
-                                    d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"
-                                />
-                                <polyline points="13,2 13,9 20,9" />
-                            </svg>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Unified Inbox</div>
+                            <p class="feat-desc">See all your accounts in one merged feed. One scroll, every email — no context switching.</p>
                         </div>
-                        <div class="feat-name">GPL-3.0 Open Source</div>
-                        <p class="feat-desc">
-                            Every line of Kotlin, every Composable — publicly
-                            readable on GitHub. Eight releases and counting. PRs
-                            welcome.
-                        </p>
                     </div>
-                    <div class="feat-card">
+
+                    <!-- Row 3 -->
+                    <div class="feat-card feat-span-2">
                         <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                            >
-                                <rect
-                                    x="3"
-                                    y="3"
-                                    width="18"
-                                    height="18"
-                                    rx="3"
-                                />
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
+                                <rect x="3" y="3" width="18" height="18" rx="3" />
                                 <path d="M3 9h18M9 21V9" />
                             </svg>
                         </div>
-                        <div class="feat-name">Pure Monochrome</div>
-                        <p class="feat-desc">
-                            Black. White. Nothing in between. A Material 3
-                            Expressive system stripped of all colour accents.
-                        </p>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Pure Monochrome</div>
+                            <p class="feat-desc">Black. White. Nothing in between. A Material 3 Expressive system stripped of all colour accents for ultimate focus.</p>
+                        </div>
                     </div>
-                    <div class="feat-card">
+                    <div class="feat-card feat-span-2">
                         <div class="feat-icon">
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="white"
-                                stroke-width="2.2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <polyline
-                                    points="23,6 13.5,15.5 8.5,10.5 1,18"
-                                />
-                                <polyline points="17,6 23,6 23,12" />
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                <path d="M16 3.13a4 4 0 010 7.75" />
                             </svg>
                         </div>
-                        <div class="feat-name">More Coming Soon</div>
-                        <p class="feat-desc">
-                            Labels, threads, rich text compose, and more —
-                            actively in development. Star the repo to follow
-                            along.
-                        </p>
+                        <div class="feat-text-wrap">
+                            <div class="feat-name">Multiple Accounts</div>
+                            <p class="feat-desc">Add Gmail and Microsoft Outlook accounts and switch between them effortlessly. All your inboxes, one app.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="minor-title">And so much more</h3>
+                <div class="features-list">
+                    <div class="feat-list-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Background Sync
+                    </div>
+                    <div class="feat-list-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Smart Undo Toasts
+                    </div>
+                    <div class="feat-list-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Refined Settings
+                    </div>
+                    <div class="feat-list-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Long Press Context Menu
+                    </div>
+                    <div class="feat-list-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        GPL-3.0 Open Source
+                    </div>
+                    <div class="feat-list-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        More features coming soon
                     </div>
                 </div>
             </div>
@@ -2307,3 +2069,4 @@
         </footer>
     </body>
 </html>
+
