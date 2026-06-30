@@ -785,7 +785,7 @@
                 font-weight: 600;
                 color: #ccc;
                 letter-spacing: 0.3px;
-                margin-bottom: 12px;
+                margin-bottom: 14px;
             }
             .dl-flavor p {
                 font-size: 13px;
@@ -808,6 +808,41 @@
             }
             .dl-flavor a:hover {
                 text-decoration-color: #fff;
+            }
+            .dl-flavor-label {
+                font-size: 12px;
+                font-weight: 600;
+                color: #777;
+                margin-bottom: 8px;
+                letter-spacing: 0.3px;
+            }
+            .dl-flavor-loss {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                margin: 12px 0 14px;
+                padding: 12px 16px;
+                background: rgba(255, 255, 255, 0.04);
+                border-radius: 12px;
+                border: 1px solid #2a2a2a;
+            }
+            .dl-flavor-loss-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 13px;
+                color: #777;
+                line-height: 1.4;
+            }
+            .dl-flavor-loss-item svg {
+                flex-shrink: 0;
+            }
+            .dl-flavor-loss-item strong {
+                color: #d4d4d4;
+            }
+            .dl-flavor-hl {
+                color: #aaa;
+                font-weight: 600;
             }
 
             /* ── SUPPORT SECTION ── */
@@ -2087,17 +2122,33 @@
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         <path d="M12 8v4"/><path d="M12 16h.01"/>
                     </svg>
-                    Note on GitHub builds
+                    Flavour differences
                 </div>
                 <p>
-                    <strong>Google Sign-In</strong> is temporarily disabled on the GitHub
-                    release while OAuth verification is in progress. <strong>Outlook</strong>
-                    and <strong>IMAP/SMTP</strong> accounts work without restriction.
+                    Monomail comes in two flavours. The app is in <strong class="dl-flavor-hl">closed testing</strong>
+                    on Google Play — join the test to get the full build.
+                </p>
+
+                <div class="dl-flavor-label">You'll miss on the GitHub build:</div>
+                <div class="dl-flavor-loss">
+                    <div class="dl-flavor-loss-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                        <strong>Gmail account sign-in</strong> via Google OAuth
+                    </div>
+                    <div class="dl-flavor-loss-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                        <strong>Seamless setup</strong> with pre-configured OAuth credentials
+                    </div>
+                </div>
+
+                <div class="dl-flavor-label">Still works:</div>
+                <p>
+                    <strong>Outlook</strong> and <strong>IMAP/SMTP</strong> accounts
+                    (Gmail, Yahoo, Zoho, etc.) work without restriction.
                 </p>
                 <p>
-                    To build the full flavour with Google Sign-In from source, see the
-                    <a href="https://github.com/shrivatsav-0/monomail" target="_blank">project README</a>
-                    for setup instructions.
+                    To build the full flavour from source, see the
+                    <a href="https://github.com/shrivatsav-0/monomail" target="_blank">project README</a>.
                 </p>
             </div>
         </section>
