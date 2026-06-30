@@ -768,6 +768,47 @@
                 font-size: 13px;
                 color: #444;
             }
+            .dl-flavor {
+                max-width: 600px;
+                margin: 32px auto 0;
+                padding: 20px 24px;
+                border: 1.5px solid #333;
+                border-radius: 20px;
+                background: transparent;
+                text-align: left;
+            }
+            .dl-flavor-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #ccc;
+                letter-spacing: 0.3px;
+                margin-bottom: 12px;
+            }
+            .dl-flavor p {
+                font-size: 13px;
+                color: #666;
+                line-height: 1.6;
+                margin-bottom: 10px;
+            }
+            .dl-flavor p:last-child {
+                margin-bottom: 0;
+            }
+            .dl-flavor strong {
+                color: #aaa;
+                font-weight: 600;
+            }
+            .dl-flavor a {
+                color: #fff;
+                text-decoration: underline;
+                text-underline-offset: 2px;
+                text-decoration-color: #555;
+            }
+            .dl-flavor a:hover {
+                text-decoration-color: #fff;
+            }
 
             /* ── SUPPORT SECTION ── */
             .support-section {
@@ -2040,6 +2081,25 @@
                 Android 8.0 (API 26) and above · Enable "Install unknown apps"
                 in device settings
             </p>
+            <div class="dl-flavor">
+                <div class="dl-flavor-header">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M12 8v4"/><path d="M12 16h.01"/>
+                    </svg>
+                    Note on GitHub builds
+                </div>
+                <p>
+                    <strong>Google Sign-In</strong> is temporarily disabled on the GitHub
+                    release while OAuth verification is in progress. <strong>Outlook</strong>
+                    and <strong>IMAP/SMTP</strong> accounts work without restriction.
+                </p>
+                <p>
+                    To build the full flavour with Google Sign-In from source, see the
+                    <a href="https://github.com/shrivatsav-0/monomail" target="_blank">project README</a>
+                    for setup instructions.
+                </p>
+            </div>
         </section>
 
         <!-- DISCORD -->
