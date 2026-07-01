@@ -22,10 +22,10 @@ Thumbs.db
 index.html
 pp.html
 tos.html
-imgs/
-leaf.png
-qr-code.png
-ss.png
+/imgs/
+/leaf.png
+/qr-code.png
+/ss.png
 update.ps1
 update_features.js
 update_features.py
