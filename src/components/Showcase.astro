@@ -1,0 +1,478 @@
+---
+// Showcase — interactive carousel + accordion feature showcase
+// CSS-only: hidden radio inputs drive which screenshot is visible via :has()
+---
+
+<section class="section section-alt showcase" id="showcase">
+  <div class="container">
+    <span class="section-label">Showcase</span>
+    <h2 class="section-title">Every feature, in context.</h2>
+
+    <div class="sc">
+      <!-- Hidden radio inputs — one per feature/screenshot -->
+      <input type="radio" name="sc" id="sc-0" class="sc-radio" checked />
+      <input type="radio" name="sc" id="sc-1" class="sc-radio" />
+      <input type="radio" name="sc" id="sc-2" class="sc-radio" />
+      <input type="radio" name="sc" id="sc-3" class="sc-radio" />
+      <input type="radio" name="sc" id="sc-4" class="sc-radio" />
+      <input type="radio" name="sc" id="sc-5" class="sc-radio" />
+      <input type="radio" name="sc" id="sc-6" class="sc-radio" />
+      <input type="radio" name="sc" id="sc-7" class="sc-radio" />
+
+      <div class="sc-layout">
+        <!-- Accordion column -->
+        <div class="sc-items">
+          <label for="sc-0" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Unified Inbox</span>
+              <span class="sc-item-desc">All your accounts in one merged feed. Toggle unified view from settings.</span>
+            </div>
+          </label>
+
+          <label for="sc-1" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Multiple Accounts</span>
+              <span class="sc-item-desc">Gmail, Outlook, or any IMAP account. Add them all and switch freely.</span>
+            </div>
+          </label>
+
+          <label for="sc-2" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Smart Inbox</span>
+              <span class="sc-item-desc">High-frequency senders collapse into expandable groups with spring animations.</span>
+            </div>
+          </label>
+
+          <label for="sc-3" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Threaded Conversations</span>
+              <span class="sc-item-desc">Emails grouped into clean, navigable threads with full conversation history.</span>
+            </div>
+          </label>
+
+          <label for="sc-4" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Rich Compose</span>
+              <span class="sc-item-desc">HTML editor, attachments, undo send, and send-as aliases in one composer.</span>
+            </div>
+          </label>
+
+          <label for="sc-5" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Full Customization</span>
+              <span class="sc-item-desc">Every setting is yours to tweak. Appearance, dock, notifications, compose preferences.</span>
+            </div>
+          </label>
+
+          <label for="sc-6" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Smart Search</span>
+              <span class="sc-item-desc">Full-text search across every email, online and offline, from a morphing search bar.</span>
+            </div>
+          </label>
+
+          <label for="sc-7" class="sc-item" tabindex="0">
+            <div class="sc-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div class="sc-item-text">
+              <span class="sc-item-name">Quick Account Access</span>
+              <span class="sc-item-desc">Switch profiles in a tap. View account info and manage sessions from one place.</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Carousel column -->
+        <div class="sc-visual">
+          <div class="sc-frame">
+            <img src="/imgs/ui/5.png" alt="Unified Inbox" class="sc-img" data-idx="0" loading="lazy" />
+            <img src="/imgs/ui/3.png" alt="Multiple Accounts" class="sc-img" data-idx="1" loading="lazy" />
+            <img src="/imgs/ui/2.png" alt="Smart Inbox" class="sc-img" data-idx="2" loading="lazy" />
+            <img src="/imgs/ui/4.png" alt="Threaded Conversations" class="sc-img" data-idx="3" loading="lazy" />
+            <img src="/imgs/ui/6.png" alt="Rich Compose" class="sc-img" data-idx="4" loading="lazy" />
+            <img src="/imgs/ui/7.png" alt="Full Customization" class="sc-img" data-idx="5" loading="lazy" />
+            <img src="/imgs/ui/1.png" alt="Smart Search" class="sc-img" data-idx="6" loading="lazy" />
+            <img src="/imgs/ui/9.png" alt="Quick Account Access" class="sc-img" data-idx="7" loading="lazy" />
+          </div>
+
+          <!-- Dot indicators -->
+          <div class="sc-indicators">
+            <label for="sc-0" class="sc-dot" aria-label="Unified Inbox"></label>
+            <label for="sc-1" class="sc-dot" aria-label="Multiple Accounts"></label>
+            <label for="sc-2" class="sc-dot" aria-label="Smart Inbox"></label>
+            <label for="sc-3" class="sc-dot" aria-label="Threaded Conversations"></label>
+            <label for="sc-4" class="sc-dot" aria-label="Rich Compose"></label>
+            <label for="sc-5" class="sc-dot" aria-label="Full Customization"></label>
+            <label for="sc-6" class="sc-dot" aria-label="Smart Search"></label>
+            <label for="sc-7" class="sc-dot" aria-label="Quick Account Access"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+(function() {
+  var container = document.querySelector('.sc');
+  if (!container) return;
+  var radios = container.querySelectorAll('.sc-radio');
+  var dots = container.querySelectorAll('.sc-dot');
+  var count = radios.length;
+  if (count < 2) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var current = Array.from(radios).findIndex(function(r) { return r.checked; });
+  if (current < 0) current = 0;
+  var timer = null, resumeTimer = null;
+  var autoAdvancing = false;
+  var INTERVAL = 5000, RESUME_DELAY = 8000;
+
+  function update(index) {
+    for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active-dot');
+    radios[index].checked = true;
+    current = index;
+    dots[index].classList.add('active-dot');
+    container.dataset.auto = timer !== null ? 'true' : 'false';
+  }
+
+  function advance() {
+    autoAdvancing = true;
+    update((current + 1) % count);
+    autoAdvancing = false;
+  }
+
+  function start() {
+    stop();
+    timer = setInterval(advance, INTERVAL);
+    container.dataset.auto = 'true';
+    dots[current] && dots[current].classList.add('active-dot');
+  }
+
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+    container.dataset.auto = 'false';
+    for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active-dot');
+  }
+
+  function pause() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+      container.dataset.auto = 'false';
+      for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active-dot');
+    }
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(start, RESUME_DELAY);
+  }
+
+  for (var i = 0; i < radios.length; i++) {
+    radios[i].addEventListener('change', function() {
+      if (!autoAdvancing) pause();
+    });
+  }
+
+  start();
+})();
+</script>
+
+<style>
+/* ── SHOWCASE LAYOUT ── */
+.sc {
+  margin-top: 48px;
+}
+
+.sc-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.sc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── ACCORDION ITEMS ── */
+.sc-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.sc-item:hover {
+  background: var(--bg-elevated);
+}
+
+.sc-item-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.25s ease;
+  margin-top: 2px;
+}
+
+.sc-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sc-item-name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.25s ease;
+}
+
+.sc-item-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Checked state — highlight the active accordion item */
+.showcase:has(#sc-0:checked) label[for="sc-0"],
+.showcase:has(#sc-1:checked) label[for="sc-1"],
+.showcase:has(#sc-2:checked) label[for="sc-2"],
+.showcase:has(#sc-3:checked) label[for="sc-3"],
+.showcase:has(#sc-4:checked) label[for="sc-4"],
+.showcase:has(#sc-5:checked) label[for="sc-5"],
+.showcase:has(#sc-6:checked) label[for="sc-6"],
+.showcase:has(#sc-7:checked) label[for="sc-7"] {
+  background: var(--bg-elevated);
+  border-color: var(--border-vis);
+}
+
+.showcase:has(#sc-0:checked) label[for="sc-0"] .sc-item-name,
+.showcase:has(#sc-1:checked) label[for="sc-1"] .sc-item-name,
+.showcase:has(#sc-2:checked) label[for="sc-2"] .sc-item-name,
+.showcase:has(#sc-3:checked) label[for="sc-3"] .sc-item-name,
+.showcase:has(#sc-4:checked) label[for="sc-4"] .sc-item-name,
+.showcase:has(#sc-5:checked) label[for="sc-5"] .sc-item-name,
+.showcase:has(#sc-6:checked) label[for="sc-6"] .sc-item-name,
+.showcase:has(#sc-7:checked) label[for="sc-7"] .sc-item-name {
+  color: var(--text);
+}
+
+.showcase:has(#sc-0:checked) label[for="sc-0"] .sc-item-desc,
+.showcase:has(#sc-1:checked) label[for="sc-1"] .sc-item-desc,
+.showcase:has(#sc-2:checked) label[for="sc-2"] .sc-item-desc,
+.showcase:has(#sc-3:checked) label[for="sc-3"] .sc-item-desc,
+.showcase:has(#sc-4:checked) label[for="sc-4"] .sc-item-desc,
+.showcase:has(#sc-5:checked) label[for="sc-5"] .sc-item-desc,
+.showcase:has(#sc-6:checked) label[for="sc-6"] .sc-item-desc,
+.showcase:has(#sc-7:checked) label[for="sc-7"] .sc-item-desc {
+  opacity: 0.85;
+}
+
+.showcase:has(#sc-0:checked) label[for="sc-0"] .sc-item-icon,
+.showcase:has(#sc-1:checked) label[for="sc-1"] .sc-item-icon,
+.showcase:has(#sc-2:checked) label[for="sc-2"] .sc-item-icon,
+.showcase:has(#sc-3:checked) label[for="sc-3"] .sc-item-icon,
+.showcase:has(#sc-4:checked) label[for="sc-4"] .sc-item-icon,
+.showcase:has(#sc-5:checked) label[for="sc-5"] .sc-item-icon,
+.showcase:has(#sc-6:checked) label[for="sc-6"] .sc-item-icon,
+.showcase:has(#sc-7:checked) label[for="sc-7"] .sc-item-icon {
+  color: var(--text);
+  border-color: var(--border-vis);
+  background: var(--bg-hover);
+}
+
+/* ── CAROUSEL VISUAL ── */
+.sc-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.sc-frame {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 9 / 19.5;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.sc-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  will-change: opacity;
+}
+
+/* Show the image matching the checked radio */
+.showcase:has(#sc-0:checked) .sc-img[data-idx="0"],
+.showcase:has(#sc-1:checked) .sc-img[data-idx="1"],
+.showcase:has(#sc-2:checked) .sc-img[data-idx="2"],
+.showcase:has(#sc-3:checked) .sc-img[data-idx="3"],
+.showcase:has(#sc-4:checked) .sc-img[data-idx="4"],
+.showcase:has(#sc-5:checked) .sc-img[data-idx="5"],
+.showcase:has(#sc-6:checked) .sc-img[data-idx="6"],
+.showcase:has(#sc-7:checked) .sc-img[data-idx="7"] {
+  opacity: 1;
+}
+
+/* ── DOT INDICATORS ── */
+.sc-indicators {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-vis);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.sc-dot:hover {
+  background: var(--text-secondary);
+}
+
+.showcase:has(#sc-0:checked) .sc-dot[for="sc-0"],
+.showcase:has(#sc-1:checked) .sc-dot[for="sc-1"],
+.showcase:has(#sc-2:checked) .sc-dot[for="sc-2"],
+.showcase:has(#sc-3:checked) .sc-dot[for="sc-3"],
+.showcase:has(#sc-4:checked) .sc-dot[for="sc-4"],
+.showcase:has(#sc-5:checked) .sc-dot[for="sc-5"],
+.showcase:has(#sc-6:checked) .sc-dot[for="sc-6"],
+.showcase:has(#sc-7:checked) .sc-dot[for="sc-7"] {
+  background: var(--text);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* Auto-advance: pulse on the active dot */
+.sc[data-auto="true"] .sc-dot.active-dot {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(255,255,255,0.05); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .sc-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .sc-items {
+    order: 2;
+  }
+
+  .sc-visual {
+    order: 1;
+  }
+
+  .sc-frame {
+    max-width: 260px;
+  }
+
+  .sc-item {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sc-frame {
+    max-width: 220px;
+  }
+
+  .sc-item {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .sc-item-name {
+    font-size: 14px;
+  }
+
+  .sc-item-desc {
+    font-size: 12px;
+  }
+}
+</style>

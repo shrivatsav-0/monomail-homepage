@@ -1,0 +1,69 @@
+---
+const { version } = Astro.props;
+---
+
+<section class="section" id="whats-new">
+  <div class="container">
+    <div class="whats-new-header">
+      <h2 class="section-title">What's new</h2>
+      <span class="version-pill">{version}</span>
+    </div>
+    <div class="new-grid">
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v4"/><path d="M12 16h.01"/>
+          </svg>
+        </div>
+        <div class="new-card-name">PGP Encryption</div>
+        <p class="new-card-desc">Encrypt, sign, and decrypt emails with OpenPGP. Generate Ed25519 key pairs, import existing keys, and send PGP/MIME encrypted messages to any recipient.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>
+          </svg>
+        </div>
+        <div class="new-card-name">Unified Inbox</div>
+        <p class="new-card-desc">See every account in one merged feed. Toggle unified view from settings and switch between per-account and combined inboxes instantly.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="new-card-name">Undo Send</div>
+        <p class="new-card-desc">Configurable grace window from 5 to 30 seconds. Cancel and edit before the message actually goes out. Great for catching last-minute mistakes.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+            <path d="m15 5 4 4"/>
+          </svg>
+        </div>
+        <div class="new-card-name">Send-As Aliases</div>
+        <p class="new-card-desc">Send from alternative email addresses on the same account. Configure and switch between verified aliases from the compose screen dropdown.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/>
+          </svg>
+        </div>
+        <div class="new-card-name">Customizable Dock</div>
+        <p class="new-card-desc">Choose which folders live in your bottom dock. Reorder up to 4 tabs from inbox, sent, archived, snoozed, starred, trash, and spam.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <div class="new-card-name">Scheduled Messages</div>
+        <p class="new-card-desc">Write emails now and send them whenever you want. Full scheduled screen with edit and cancel, plus email templates you can reuse.</p>
+      </div>
+    </div>
+  </div>
+</section>

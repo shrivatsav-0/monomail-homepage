@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Community from "../components/Community.astro";
+import Support from "../components/Support.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Privacy Policy"
+  description="Monomail Privacy Policy. How we handle, use, and protect your data when you use the Monomail application."
+  pageClass="page-legal"
+>
+  <Nav />
+
+  <section class="legal-content">
+    <h2>Privacy Policy</h2>
+    <p class="effective-date">Effective Date: June 14, 2026</p>
+
+    <h3>Introduction</h3>
+    <p>Welcome to Monomail. Monomail is an open-source student project designed to provide a distilled and minimalistic email client experience. This Privacy Policy explains how we handle, use, and protect your data when you use the Monomail application.</p>
+
+    <h3>1. Scope of Application</h3>
+    <p>
+      Monomail uses the Google OAuth 2.0 API to access your Gmail account. The specific scope requested is:<br />
+      <code>https://www.googleapis.com/auth/gmail.modify</code><br /><br />
+      This scope is necessary for the core functionality of the application, which includes:<br />
+      - Reading your emails to display them in the app.<br />
+      - Organizing emails (e.g., archiving, deleting, marking as read).<br />
+      - Sending emails on your behalf.
+    </p>
+
+    <h3>2. Data Storage and Processing</h3>
+    <p>
+      <strong>Monomail operates entirely locally on your device.</strong><br /><br />
+      - <strong>No Third-Party Servers:</strong> We do not own, operate, or use any third-party servers to process, store, or transmit your email data.<br />
+      - <strong>Local Storage:</strong> All email data, access tokens, and user preferences are stored securely on your local device using Android's Credential Manager and Encrypted DataStore.<br />
+      - <strong>Direct Communication:</strong> The app communicates directly between your device and Google's Gmail API servers.
+    </p>
+
+    <h3>3. Data Sharing and Disclosure</h3>
+    <p>Because Monomail does not collect or transmit your data to any external servers (other than Google's own API), we do not and cannot share, sell, or disclose your personal information or email data to any third parties.</p>
+
+    <h3>4. Open Source and Student Project Status</h3>
+    <p>Monomail is an open-source project created by a student for educational purposes. The source code is publicly available for review, ensuring complete transparency regarding how your data is handled.</p>
+
+    <h3>5. Your Consent</h3>
+    <p>By using Monomail, you consent to the direct processing of your Gmail data on your local device as described in this Privacy Policy.</p>
+
+    <h3>6. Changes to this Policy</h3>
+    <p>We may update this Privacy Policy from time to time. Any changes will be reflected in the repository and within the app.</p>
+
+    <h3>7. Contact</h3>
+    <p>If you have any questions about this Privacy Policy, please refer to the project's public repository.</p>
+  </section>
+
+  <Community />
+  <Support />
+  <Footer />
+</BaseLayout>

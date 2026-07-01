@@ -1,0 +1,31 @@
+# build output
+dist/
+
+# dependencies
+node_modules/
+.bun/
+
+# env
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# old pre-migration site (replaced by Astro in src/)
+index.html
+pp.html
+tos.html
+imgs/
+leaf.png
+qr-code.png
+ss.png
+update.ps1
+update_features.js
+update_features.py
