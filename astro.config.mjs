@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
@@ -7,4 +8,10 @@ export default defineConfig({
   build: {
     assets: "_assets",
   },
+  output: "static",
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });
