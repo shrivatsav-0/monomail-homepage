@@ -12,21 +12,11 @@ const { version } = Astro.props;
       <div class="new-card">
         <div class="new-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
         </div>
-        <div class="new-card-name">Email Detail Overhaul</div>
-        <p class="new-card-desc">Toggle between grouped Conversation view and expanded Message Chain view. Share any email as a beautifully rendered image, force light mode for HTML content, and collapse long quoted replies by default.</p>
-      </div>
-      <div class="new-card">
-        <div class="new-card-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-            <path d="m15 5 4 4"/>
-          </svg>
-        </div>
-        <div class="new-card-name">Compose Redesign</div>
-        <p class="new-card-desc">Floating bottom dock puts Send, Schedule, and Attach in your thumb zone. Contact avatars in autocomplete, an auto-grow body editor, and a full formatting toolbar for rich emails.</p>
+        <div class="new-card-name">Smart Dark Mode</div>
+        <p class="new-card-desc">Algorithmic dark mode powered by the WebView API. HTML emails adapt automatically — no manual CSS overrides needed.</p>
       </div>
       <div class="new-card">
         <div class="new-card-icon">
@@ -34,35 +24,44 @@ const { version } = Astro.props;
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
           </svg>
         </div>
-        <div class="new-card-name">Parallel Sync &amp; Performance</div>
-        <p class="new-card-desc">All accounts sync concurrently instead of one at a time. Outlook sync is 5-10x faster thanks to concurrent API calls. Bounded memory keeps the app responsive on large mailboxes.</p>
+        <div class="new-card-name">Smooth Email Scrolling</div>
+        <p class="new-card-desc">Fixed measured height, nested scrolling, table wrapping, and overflow. Long emails scroll fluidly without jumps.</p>
       </div>
       <div class="new-card">
         <div class="new-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
           </svg>
         </div>
-        <div class="new-card-name">Settings Overhaul</div>
-        <p class="new-card-desc">New hub-and-spoke settings with category cards, spring animations, and peak-end footer. Animated theme toggle, templates management, and a dedicated support section with Ko-fi and Discord.</p>
+        <div class="new-card-name">Gmail-like Reading</div>
+        <p class="new-card-desc">Strip body inline styles and use loadWithOverviewMode for a Gmail-like zoom level on desktop-rendered emails.</p>
       </div>
       <div class="new-card">
         <div class="new-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M2 10h20"/>
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
           </svg>
         </div>
-        <div class="new-card-name">HTML Email Improvements</div>
-        <p class="new-card-desc">Safer rendering with a built-in HTML sanitizer that strips unsafe content. Better dark mode support via colour-scheme media queries, consistent typography, and smoother scrolling.</p>
+        <div class="new-card-name">Responsive Email Support</div>
+        <p class="new-card-desc">Detects responsive emails via @media width overrides and viewport queries. Skips zoom for mobile-optimized content.</p>
       </div>
       <div class="new-card">
         <div class="new-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <div class="new-card-name">Stability &amp; Bug Fixes</div>
-        <p class="new-card-desc">Unified inbox crash fixed, Outlook token refresh corrected, late email notifications resolved, system font option added, and PGP detection hardened against false positives on calendar invites.</p>
+        <div class="new-card-name">Reliability Improvements</div>
+        <p class="new-card-desc">Handle 404/410 on stale resources gracefully. Token refresh now retries with exponential backoff instead of failing silently.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="new-card-name">Crash Fixes</div>
+        <p class="new-card-desc">Fixed dock tab crash by validating DockConfig after Gson deserialization. Email body now preserved during sync operations.</p>
       </div>
     </div>
   </div>

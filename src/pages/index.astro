@@ -16,7 +16,7 @@ import Footer from "../components/Footer.astro";
 const res = await fetch("https://api.github.com/repos/shrivatsav-0/monomail/releases/latest", {
   headers: { "User-Agent": "Monomail-Site" },
 }).catch(() => null);
-const latestTag = res?.ok ? (await res.json()).tag_name : "v1.7.1";
+const latestTag = res?.ok ? (await res.json()).tag_name : "v1.7.9";
 ---
 
 <BaseLayout>

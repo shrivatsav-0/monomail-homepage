@@ -1,6 +1,6 @@
 {
   "name": "monomail",
-  "version": "1.5.4",
+  "version": "1.7.9",
   "description": "Monomail — Your inbox, distilled. Landing page built with Astro.",
   "type": "module",
   "scripts": {
