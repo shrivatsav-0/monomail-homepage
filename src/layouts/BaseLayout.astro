@@ -9,7 +9,7 @@ export interface Props {
 
 const {
   title = "Monomail | Your inbox, distilled.",
-  description = "Monomail is a black-and-white email client for Gmail and Outlook on Android built with Jetpack Compose and Material 3. Push notifications, multi-account, offline-first, rich text compose. No colour, no clutter.",
+  description = "Monomail is a mono email client for Android — one unified look for all your emails. Built with Jetpack Compose and Material 3.",
   pageClass,
 } = Astro.props;
 
@@ -28,7 +28,7 @@ const ogImageURL = new URL("/imgs/ss.png", Astro.site).href;
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="Monomail, Android email app, Gmail client, Outlook client, Jetpack Compose, Material 3, monochrome, open source, offline email"
+      content="Monomail, Android email app, Jetpack Compose, Material 3, monochrome, open source, offline email"
     />
     <meta name="author" content="Shrivatsav" />
     <meta name="robots" content="index, follow" />

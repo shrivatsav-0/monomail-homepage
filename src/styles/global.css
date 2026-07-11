@@ -162,6 +162,10 @@ ul { list-style: none; }
   opacity: 1;
 }
 
+.btn-icon {
+  padding: 12px;
+  gap: 0;
+}
 .btn-outline {
   background: transparent;
   color: var(--text-secondary);
@@ -273,6 +277,7 @@ nav:hover {
   gap: 12px;
 }
 .nav-cta .btn { padding: 8px 18px; font-size: 13px; }
+.nav-cta .btn-icon { padding: 8px; gap: 0; }
 
 .nav-mobile-toggle {
   display: none;
@@ -863,6 +868,11 @@ nav:hover {
   font-size: 17px;
   color: var(--text-secondary);
   margin-bottom: 36px;
+}
+.dl-count {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
 }
 .dl-actions {
   display: flex;
