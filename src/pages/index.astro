@@ -13,13 +13,13 @@ import Support from "../components/Support.astro";
 import Footer from "../components/Footer.astro";
 
 // Fetch latest release tag from GitHub at build time
-const res = await fetch("https://api.github.com/repos/shrivatsav-0/monomail/releases/latest", {
+const res = await fetch("https://api.github.com/repos/shrivatsav-org/monomail/releases/latest", {
   headers: { "User-Agent": "Monomail-Site" },
 }).catch(() => null);
 const latestTag = res?.ok ? (await res.json()).tag_name : "v1.7.9";
 
 // Fetch total download count across all releases
-const releasesRes = await fetch("https://api.github.com/repos/shrivatsav-0/monomail/releases?per_page=100", {
+const releasesRes = await fetch("https://api.github.com/repos/shrivatsav-org/monomail/releases?per_page=100", {
   headers: { "User-Agent": "Monomail-Site" },
 }).catch(() => null);
 const releases = releasesRes?.ok ? (await releasesRes.json()) : [];

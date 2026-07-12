@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **landing/marketing website** for **Monomail** — an open-source, monochrome (black-and-white) Android email client for Gmail and Outlook, built with Jetpack Compose and Material 3 Expressive.
 
-The Android app source code lives in a separate repository (`shrivatsav-0/monomail` on GitHub). This repo is **only the static marketing site**.
+The Android app source code lives in a separate repository (`shrivatsav-org/monomail` on GitHub). This repo is **only the static marketing site**.
 
 ## Commands
 
