@@ -1,0 +1,146 @@
+---
+// Download Modal
+---
+
+<dialog id="download-modal" class="download-modal">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close-btn" aria-label="Close modal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
+    <div class="hero-badge" style="margin: 0 auto 16px;">
+      <span class="dot"></span>Select version
+    </div>
+    <h2 class="hero-title" style="font-size: 32px; margin-bottom: 8px;">
+      Get <span class="accent">Monomail</span>
+    </h2>
+    <p class="hero-sub" style="font-size: 16px; margin: 0 auto 32px;">
+      Choose your preferred download method.
+    </p>
+    
+    <div class="hero-actions" style="flex-direction: column; gap: 16px; justify-content: center; align-items: stretch; max-width: 320px; margin: 0 auto;">
+      <!-- Play Store (Prioritized) -->
+      <a href="https://play.google.com/store/apps/details?id=com.shrivatsav.monomail" target="_blank" class="btn btn-primary" style="justify-content: center; height: auto; padding: 16px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 16px;">
+            <svg width="20" height="20" viewBox="0 0 640 640" fill="currentColor">
+              <path d="M389.6 298.3L168.9 77L449.7 238.2L389.6 298.3zM111.3 64C98.3 70.8 89.6 83.2 89.6 99.3L89.6 540.6C89.6 556.7 98.3 569.1 111.3 575.9L367.9 319.9L111.3 64zM536.5 289.6L477.6 255.5L411.9 320L477.6 384.5L537.7 350.4C555.7 336.1 555.7 303.9 536.5 289.6zM168.9 563L449.7 401.8L389.6 341.7L168.9 563z"/>
+            </svg>
+            Google Play Store
+          </div>
+          <span style="font-size: 12px; font-weight: normal; opacity: 0.9;">Recommended · Full Features</span>
+        </div>
+      </a>
+
+      <!-- GitHub / APK -->
+      <a href="https://github.com/shrivatsav-org/monomail/releases/latest" target="_blank" class="btn btn-ghost" style="justify-content: center; height: auto; padding: 16px; border: 1px solid var(--border-color, #333);">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 16px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            GitHub / F-Droid
+          </div>
+          <span style="font-size: 12px; font-weight: normal; opacity: 0.7;">Open Source APK</span>
+        </div>
+      </a>
+    </div>
+    
+    <div class="dl-flavor-loss" style="max-width: 400px; margin: 32px auto 0; text-align: left; padding: 16px; background: rgba(0,0,0,0.3); border-radius: 12px;">
+      <div class="dl-flavor-label" style="text-align: center; margin-bottom: 12px;">GitHub version limits:</div>
+      <div class="dl-flavor-loss-item" style="font-size: 13px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="color: #ff5252;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <span>No Push Notifications (requires FCM)</span>
+      </div>
+      <div class="dl-flavor-loss-item" style="font-size: 13px; margin-top: 8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="color: #ff5252;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <span><strong>Gmail account sign-in</strong> via Google OAuth is restricted. Outlook & IMAP/SMTP work fine.</span>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+.download-modal {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 24px;
+  margin: auto;
+}
+
+.download-modal::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background: var(--bg-card, #111);
+  color: var(--text-color, #e0e0e0);
+  padding: 48px 32px;
+  border-radius: 24px;
+  position: relative;
+  border: 1px solid var(--border-color, #222);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255,255,255,0.05);
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('download-modal') as HTMLDialogElement;
+  const closeBtn = document.getElementById('modal-close-btn');
+  const openBtns = document.querySelectorAll('.open-download-modal');
+
+  if (modal && closeBtn) {
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.close();
+    });
+
+    modal.addEventListener('click', (e) => {
+      const dialogDimensions = modal.getBoundingClientRect();
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        modal.close();
+      }
+    });
+  }
+});
+</script>

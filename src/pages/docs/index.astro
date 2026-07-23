@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Documentation"
+  description="MonoMail documentation — guides for using the monochrome Android email client."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-hub">
+    <h2>Documentation</h2>
+    <p class="subtitle">Everything you need to get the most out of MonoMail.</p>
+
+    <div class="docs-grid">
+      <a href="/docs/getting-started" class="docs-card">
+        <h3>Getting Started</h3>
+        <p>Install, sign in, and send your first email.</p>
+      </a>
+      <a href="/docs/inbox" class="docs-card">
+        <h3>Inbox</h3>
+        <p>Layout, tabs, swipe gestures, bulk select, and smart grouping.</p>
+      </a>
+      <a href="/docs/composing" class="docs-card">
+        <h3>Composing & Sending</h3>
+        <p>Write, format, attach files, schedule, and templates.</p>
+      </a>
+      <a href="/docs/multi-account" class="docs-card">
+        <h3>Multi-Account</h3>
+        <p>Manage multiple accounts and unified inbox.</p>
+      </a>
+      <a href="/docs/pgp" class="docs-card">
+        <h3>PGP Encryption</h3>
+        <p>End-to-end encryption and signing for your emails.</p>
+      </a>
+      <a href="/docs/notifications" class="docs-card">
+        <h3>Notifications & Sync</h3>
+        <p>Background sync, push notifications, and notification actions.</p>
+      </a>
+      <a href="/docs/settings" class="docs-card">
+        <h3>Settings Reference</h3>
+        <p>Every setting explained, category by category.</p>
+      </a>
+      <a href="/docs/architecture" class="docs-card">
+        <h3>Architecture</h3>
+        <p>Module structure, data flow, and security for developers.</p>
+      </a>
+      <a href="/docs/troubleshooting" class="docs-card">
+        <h3>Troubleshooting & FAQ</h3>
+        <p>Common issues and how to fix them.</p>
+      </a>
+    </div>
+
+    <p style="margin-top: 32px; font-size: 14px;">
+      <a href="/docs/dev" style="color: var(--text);">Developer Guide →</a>
+    </p>
+  </div>
+
+  <Footer />
+</BaseLayout>

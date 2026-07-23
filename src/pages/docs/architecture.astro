@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Architecture"
+  description="MonoMail architecture — module structure, data flow, offline-first design, and security."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Architecture (Advanced)</h2>
+
+    <h3>Multi-module structure</h3>
+    <p>MonoMail is divided into 13 modules:</p>
+    <pre><code>:app                        # Main application shell (DI, NavGraph, ActionQueueManager)
+:core:model                 # Pure domain models
+:core:designsystem          # Theme, typography, shared UI components
+:core:database              # Room database, entities, DAOs, migrations
+:core:network               # Retrofit APIs, Gmail/Outlook/IMAP providers
+:core:data                  # Repository, auth, settings, workers
+:core:pgp                   # PGP encryption engine
+:feature:auth               # Sign-in screens and ViewModels
+:feature:inbox              # Inbox, dock bar, email list
+:feature:detail             # Email thread detail screen
+:feature:compose            # Email compose screen
+:feature:settings           # Settings hub and 11 sub-screens
+:feature:attachment         # In-app attachment viewer</code></pre>
+
+    <h3>Data flow</h3>
+    <pre><code>UI (Compose) -> ViewModel -> EmailRepository -> Room DB (local cache)
+                                           -> EmailProvider (Gmail/Outlook/IMAP API)
+
+Writes: UI -> ViewModel -> EmailRepository
+  -> update Room DB immediately (optimistic)
+  -> insert PendingActionEntity
+  -> ActionQueueManager processes pending actions against provider API</code></pre>
+
+    <h3>Offline-first</h3>
+    <p>The app prioritises the local database:</p>
+    <ol>
+      <li><strong>Reads</strong> — always from Room DB via reactive Flow queries. The UI never blocks.</li>
+      <li><strong>Writes</strong> — optimistic: update local DB first, then sync to server via pending actions.</li>
+      <li><strong>Sync</strong> — <code>EmailRepository.refreshInbox()</code> fetches from provider and upserts into Room.</li>
+      <li><strong>Pending actions</strong> — if a write fails (network issue), it retries up to 5 times before marking as FAILED.</li>
+    </ol>
+
+    <h3>Security</h3>
+    <table>
+      <tr><th>Layer</th><th>Mechanism</th></tr>
+      <tr><td>Local database</td><td>SQLCipher encryption (256-bit key, stored in EncryptedSharedPreferences)</td></tr>
+      <tr><td>Account credentials</td><td>AES-GCM via Android KeyStore</td></tr>
+      <tr><td>IMAP passwords</td><td>AES-GCM encrypted strings</td></tr>
+      <tr><td>PGP private keys</td><td>Armored file encrypted via SecurityUtil</td></tr>
+      <tr><td>PGP passphrases</td><td>Encrypted blobs on disk</td></tr>
+      <tr><td>DataStore</td><td>EncryptedSharedPreferences (AES256_GCM value encryption, AES256_SIV key encryption)</td></tr>
+      <tr><td>Network</td><td>Retrofit with Bearer token auth, 401 detection for re-auth</td></tr>
+    </table>
+
+    <h3>Micro-interactions and animations</h3>
+    <p>MonoMail uses spring physics throughout for tactile feedback. No easing curves — everything bounces naturally.</p>
+    <table>
+      <tr><th>Element</th><th>Animation</th><th>Spec</th></tr>
+      <tr><td>Settings card press</td><td>Scale to 0.97</td><td>Spring.DampingRatioMediumBouncy restore</td></tr>
+      <tr><td>Theme selector tap</td><td>Selected segment bounces to 1.04x</td><td>Spring.DampingRatioMediumBouncy + colour tween (250ms)</td></tr>
+      <tr><td>Dock tab switch</td><td>Animated background, icon tint, label width</td><td>updateTransition</td></tr>
+      <tr><td>Sent overlay</td><td>Spring scale-in + fade-in</td><td>dampingRatio 0.5, stiffness 300</td></tr>
+      <tr><td>Loading shimmer</td><td>Sweeping linear gradient</td><td>Infinite tween(1000ms)</td></tr>
+      <tr><td>Conversations expand/collapse</td><td>Content size animation</td><td>Spring</td></tr>
+    </table>
+
+    <div class="docs-nav">
+      <a href="/docs/settings">← Settings</a>
+      <a href="/docs/troubleshooting">Troubleshooting →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

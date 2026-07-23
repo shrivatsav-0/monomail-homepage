@@ -12,56 +12,56 @@ const { version } = Astro.props;
       <div class="new-card">
         <div class="new-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <div class="new-card-name">Center-Split Layout</div>
+        <p class="new-card-desc">Introduced a responsive center-split layout for reading emails on wider screens and tablets. Your inbox on the left, full email content on the right.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <div class="new-card-name">In-App Attachment Preview</div>
+        <p class="new-card-desc">Open PDFs, photos, videos, and audio files directly inside the app. Photo viewer, ExoPlayer for video, PdfRenderer for documents — no external apps needed.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <div class="new-card-name">Gallery Picker</div>
+        <p class="new-card-desc">Pick photos and videos from your device gallery to attach to emails. A clean, native media picker woven into the compose flow.</p>
+      </div>
+      <div class="new-card">
+        <div class="new-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
         </div>
-        <div class="new-card-name">Smart Dark Mode</div>
-        <p class="new-card-desc">Algorithmic dark mode powered by the WebView API. HTML emails adapt automatically — no manual CSS overrides needed.</p>
+        <div class="new-card-name">Email Colours</div>
+        <p class="new-card-desc">Choose how HTML emails render: Auto, Force Dark, Force Light, or Original. Four colour modes to match your reading preference.</p>
       </div>
       <div class="new-card">
         <div class="new-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            <polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>
           </svg>
         </div>
-        <div class="new-card-name">Smooth Email Scrolling</div>
-        <p class="new-card-desc">Fixed measured height, nested scrolling, table wrapping, and overflow. Long emails scroll fluidly without jumps.</p>
+        <div class="new-card-name">System Font</div>
+        <p class="new-card-desc">Use your device's system font across the entire app. A new Settings option for those who prefer their phone's native typography.</p>
       </div>
       <div class="new-card">
         <div class="new-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
         </div>
-        <div class="new-card-name">Optimised Reading</div>
-        <p class="new-card-desc">Strip body inline styles and use loadWithOverviewMode for an optimised zoom level on desktop-rendered emails.</p>
-      </div>
-      <div class="new-card">
-        <div class="new-card-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-          </svg>
-        </div>
-        <div class="new-card-name">Responsive Email Support</div>
-        <p class="new-card-desc">Detects responsive emails via @media width overrides and viewport queries. Skips zoom for mobile-optimized content.</p>
-      </div>
-      <div class="new-card">
-        <div class="new-card-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-        </div>
-        <div class="new-card-name">Reliability Improvements</div>
-        <p class="new-card-desc">Handle 404/410 on stale resources gracefully. Token refresh now retries with exponential backoff instead of failing silently.</p>
-      </div>
-      <div class="new-card">
-        <div class="new-card-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-        </div>
-        <div class="new-card-name">Crash Fixes</div>
-        <p class="new-card-desc">Fixed dock tab crash by validating DockConfig after Gson deserialization. Email body now preserved during sync operations.</p>
+        <div class="new-card-name">Welcome Box</div>
+        <p class="new-card-desc">First-run overlay with quick actions: Add Account, Unified Inbox, App Settings, Developer, Theme, Rate, and Share. A clean onboarding entry point.</p>
       </div>
     </div>
   </div>

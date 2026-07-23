@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Developer Setup"
+  description="Set up the MonoMail development environment — prerequisites, first build, and IDE configuration."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Getting Started</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+      <li><strong>Android Studio</strong> Ladybug (2024.3+) or later</li>
+      <li><strong>JDK 17+</strong> (Temurin recommended)</li>
+      <li><strong>Android SDK</strong> 26–37 installed</li>
+      <li>A device or emulator running <strong>Android 8.0 (API 26)</strong> or above</li>
+    </ul>
+
+    <h3>First build</h3>
+    <pre><code>git clone https://github.com/shrivatsav-0/monomail.git
+cd monomail
+
+# Quick debug build — no API keys needed
+./gradlew assembleGithubDebug
+
+# Install on device
+./gradlew installGithubDebug</code></pre>
+
+    <p>To use Google sign-in or Outlook, you'll need API keys. See the <a href="/docs/getting-started#building-from-source">user docs</a> for details on <code>secrets.properties</code> and MSAL config.</p>
+
+    <h3>IDE setup</h3>
+    <ul>
+      <li>Open the <code>monomail/</code> root as a Gradle project in Android Studio.</li>
+      <li>Let Gradle sync finish (may take 5–10 minutes on first sync).</li>
+      <li>Run configuration: <code>app</code> with <code>githubDebug</code> build variant.</li>
+      <li>Enable "Settings → Experimental → Gradle JDK" set to JDK 17.</li>
+    </ul>
+
+    <div class="docs-nav">
+      <a href="/docs/dev">← Developer Guide</a>
+      <a href="/docs/dev/architecture">Architecture →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

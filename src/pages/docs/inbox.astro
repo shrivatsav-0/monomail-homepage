@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Inbox"
+  description="MonoMail inbox — layout, tabs, swipe gestures, bulk select, smart grouping, and conversation view."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>The Inbox</h2>
+
+    <h3>Layout</h3>
+    <p>The inbox screen is composed of:</p>
+    <ol>
+      <li><strong>Search bar</strong> (top) — tap to search locally or on the server. Shows a calendar badge when you have scheduled messages pending.</li>
+      <li><strong>Email list</strong> — lazy-loaded list of threads with pull-to-refresh.</li>
+      <li><strong>Dock bar</strong> (bottom) — configurable navigation tabs in a pill-shaped container. Overflow tabs shown in a popover.</li>
+    </ol>
+
+    <h3>Tabs</h3>
+    <table>
+      <tr><th>Tab</th><th>Contents</th></tr>
+      <tr><td><strong>Unified</strong></td><td>All accounts combined (requires Unified Inbox toggle in Settings)</td></tr>
+      <tr><td><strong>Inbox</strong></td><td>Primary inbox for the active account</td></tr>
+      <tr><td><strong>Sent</strong></td><td>Sent messages</td></tr>
+      <tr><td><strong>Archived</strong></td><td>Archived threads</td></tr>
+      <tr><td><strong>Starred</strong></td><td>Starred/flagged threads</td></tr>
+      <tr><td><strong>Trash</strong></td><td>Deleted threads (supports empty-trash action)</td></tr>
+      <tr><td><strong>Snoozed</strong></td><td>Temporarily hidden threads</td></tr>
+      <tr><td><strong>Spam</strong></td><td>Spam folder (supports report-not-spam and empty-spam)</td></tr>
+    </table>
+
+    <h3>Customising the dock bar</h3>
+    <p>Go to <strong>Settings → Navigation</strong>. The Dock Bar Editor lets you:</p>
+    <ul>
+      <li><strong>Reorder</strong> tabs (up/down buttons)</li>
+      <li><strong>Add</strong> tabs from the available list (max 4 primary tabs)</li>
+      <li><strong>Remove</strong> tabs (minimum 1)</li>
+    </ul>
+    <p>The Nav Size slider scales the dock bar icons and labels from 0.6x to 1.4x.</p>
+
+    <h3>Thread rows</h3>
+    <p>Each thread in the list shows:</p>
+    <ul>
+      <li><strong>Avatar</strong> — contact photo, falls back to first letter of sender name, then domain favicon</li>
+      <li><strong>Sender name</strong> — bold if unread</li>
+      <li><strong>Subject</strong> — bold if unread</li>
+      <li><strong>Snippet</strong> — shown when "Show Snippet Preview" is enabled in Settings</li>
+      <li><strong>Date</strong> — relative (Today: time; This week: day name; This year: date; Older: full date)</li>
+      <li><strong>Unread indicator</strong> — blue dot on the avatar, bold text, background tint</li>
+      <li><strong>Star indicator</strong> — yellow star icon when starred</li>
+      <li><strong>Message count badge</strong> — shown for threads with multiple messages</li>
+    </ul>
+
+    <h3>Swipe gestures</h3>
+    <table>
+      <tr><th>Gesture</th><th>Action</th></tr>
+      <tr><td><strong>Tap</strong></td><td>Open thread detail</td></tr>
+      <tr><td><strong>Swipe left</strong></td><td>Configurable: Archive, Star, Delete, or Mark Read/Unread</td></tr>
+      <tr><td><strong>Swipe right</strong></td><td>Configurable: Archive, Star, Delete, or Mark Read/Unread</td></tr>
+      <tr><td><strong>Long-press</strong></td><td>Contextual overlay with 4 context-aware action buttons</td></tr>
+      <tr><td><strong>Long-press avatar</strong></td><td>Enter bulk multi-select mode</td></tr>
+    </table>
+
+    <p>Swipe backgrounds are colour-coded: Archive → yellow, Star → amber, Delete → red, Mark Read/Unread → blue-grey.</p>
+
+    <h3>Bulk select mode</h3>
+    <p>Enter by long-pressing any sender avatar. Features:</p>
+    <ul>
+      <li>Animated checkbox transitions on each item</li>
+      <li><strong>Range select</strong> — tap an item body to select a range from the last toggled item</li>
+      <li><strong>Select all / Deselect all</strong> toggle in the top bar</li>
+      <li>Floating pill-shaped action bar with: Archive, Delete, Mark Read, Mark Unread, Star</li>
+      <li>Shows selected count in the top bar</li>
+    </ul>
+
+    <h3>Undo</h3>
+    <p>After certain actions (archive, delete, snooze, send), an <strong>Undo bar</strong> appears at the bottom with a 4-second countdown timer. Tap <strong>Undo</strong> to reverse the action, or let it expire to commit.</p>
+
+    <h3>Smart grouping</h3>
+    <p>When enabled (Settings → Inbox), threads from the same sender are auto-collapsed into expandable group headers. Threshold: 3+ emails within 24 hours (or 3 days if "Group Recent Only" is off).</p>
+
+    <h3>Email detail and conversation view</h3>
+    <p>Tap any thread to open the detail screen. Toggle between modes in <strong>Settings → Inbox → Conversation View</strong>.</p>
+    <table>
+      <tr><th>Mode</th><th>Behaviour</th></tr>
+      <tr><td><strong>Conversation View</strong> (default)</td><td>Only the latest message is expanded. Older messages show a snippet and expand on tap.</td></tr>
+      <tr><td><strong>Message Chain</strong></td><td>All messages expanded inline as a continuous scrollable list.</td></tr>
+    </table>
+    <p>Each message shows the sender, recipients (Cc/Bcc hidden by default), date, HTML body (rendered in a WebView with JavaScript disabled), and attachments. Opening a thread auto-marks all unread emails as read.</p>
+
+    <h3>Search</h3>
+    <p>The search bar at the top of the inbox filters threads by subject, sender name, or snippet in real-time against the local database. When no local results are found, a "Search server for older emails" prompt triggers a Gmail or Outlook API search.</p>
+
+    <h3>Scroll and polling</h3>
+    <p>Each tab remembers its scroll position across tab switches. When the app is visible, MonoMail syncs every ~2 minutes. When backgrounded, it uses the configured sync interval (15 min, 30 min, 1 hour, or manual).</p>
+
+    <div class="docs-nav">
+      <a href="/docs/getting-started">← Getting Started</a>
+      <a href="/docs/composing">Composing →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

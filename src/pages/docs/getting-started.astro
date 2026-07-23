@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Getting Started"
+  description="Install MonoMail, sign in with Gmail, Outlook, or IMAP, and send your first email."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Getting Started</h2>
+
+    <h3>Overview</h3>
+    <p>MonoMail is an open-source, monochrome email client for Android. No colour accents, no noise, just email. Connects to Gmail, Microsoft Outlook, and any IMAP/SMTP provider.</p>
+
+    <h4>Key features</h4>
+    <ul>
+      <li>Gmail (OAuth), Outlook (OAuth), and IMAP/SMTP support</li>
+      <li>Multi-account (up to 10 accounts simultaneously)</li>
+      <li>Unified Inbox — all accounts, one tab</li>
+      <li>Conversation View with collapsible threads</li>
+      <li>Snooze threads, swipe gestures, bulk multi-select</li>
+      <li>Schedule send with undo, email templates, send-as aliases</li>
+      <li>HTML compose with formatting toolbar</li>
+      <li>PGP encryption and signing</li>
+      <li>In-app attachment viewer (photos, PDFs, videos)</li>
+      <li>Offline-first: all data stored locally with SQLCipher encryption</li>
+      <li>Adaptive background sync with push notifications</li>
+    </ul>
+
+    <h4>Technical specs</h4>
+    <table>
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Min Android version</td><td>8.0 (API 26)</td></tr>
+      <tr><td>Target Android version</td><td>15 (API 35)</td></tr>
+      <tr><td>Language</td><td>100% Kotlin</td></tr>
+      <tr><td>Database</td><td>Room + SQLCipher (encrypted)</td></tr>
+      <tr><td>Architecture</td><td>Multi-module: 6 core + 6 feature modules</td></tr>
+      <tr><td>License</td><td>GPL-3.0</td></tr>
+    </table>
+
+    <hr />
+
+    <h3>Installing the APK</h3>
+    <p>Download the latest <code>.apk</code> from the <a href="https://github.com/shrivatsav-0/monomail/releases/latest" target="_blank">GitHub Releases page</a>. Install directly on your device. You may need to enable "Install unknown apps" for your file manager or browser.</p>
+
+    <p>There are two build flavors:</p>
+    <table>
+      <tr><th>Flavor</th><th>Description</th></tr>
+      <tr><td><strong>GitHub</strong></td><td>Published on GitHub Releases. Google Sign-In is temporarily disabled while OAuth verification is in progress. Outlook and IMAP work without restriction.</td></tr>
+      <tr><td><strong>Play Store</strong></td><td>Published to Google Play. All sign-in methods work.</td></tr>
+    </table>
+
+    <h3>First launch</h3>
+    <ol>
+      <li>Open MonoMail.</li>
+      <li>Swipe through the welcome screen and tap <strong>Get Started</strong>.</li>
+      <li>Choose your sign-in method:
+        <ul>
+          <li><strong>Google</strong> — uses your device's Google Accounts (Credential Manager).</li>
+          <li><strong>Microsoft</strong> — opens browser-based auth via Microsoft Authentication Library.</li>
+          <li><strong>Other (IMAP/SMTP)</strong> — manual server configuration.</li>
+        </ul>
+      </li>
+      <li>Grant notification permission when prompted (Android 13+).</li>
+      <li>You're in. The inbox loads from the server and syncs in the background.</li>
+    </ol>
+
+    <h3>Adding more accounts</h3>
+    <ul>
+      <li>Tap your avatar in the top-left corner → <strong>Add Account</strong>.</li>
+      <li>Or go to Settings → Accounts → <strong>Add Account</strong>.</li>
+    </ul>
+
+    <hr />
+
+    <h3>Building from source</h3>
+
+    <h4>Prerequisites</h4>
+    <ul>
+      <li><strong>Android Studio</strong> Ladybug or later</li>
+      <li><strong>JDK 17+</strong></li>
+      <li><strong>Android SDK</strong> (API 26 through 37)</li>
+      <li>A <strong>Google Cloud project</strong> with the Gmail API enabled (for Google Sign-In)</li>
+      <li>A <strong>Microsoft Azure App Registration</strong> with Outlook/Microsoft Graph API scopes: <code>Mail.Read</code>, <code>Mail.ReadWrite</code>, <code>Mail.Send</code>, <code>User.Read</code></li>
+    </ul>
+
+    <h4>Setup</h4>
+    <pre><code>git clone https://github.com/shrivatsav-0/monomail.git
+cd monomail</code></pre>
+
+    <p>Create <code>secrets.properties</code> in the project root:</p>
+    <pre><code>GOOGLE_CLIENT_ID=your_web_client_id_here
+PUSH_BACKEND_URL=https://your-push-worker.workers.dev</code></pre>
+
+    <h4>Build commands</h4>
+    <pre><code># Debug (no API keys needed)
+./gradlew assembleGithubDebug
+
+# Debug (with API keys from secrets.properties)
+./gradlew assemblePlaystoreDebug
+
+# Release AAB for Play Store
+./gradlew bundlePlaystoreRelease
+
+# Release APK for GitHub
+./gradlew assembleGithubRelease
+
+# Install on device
+./gradlew installGithubDebug</code></pre>
+
+    <div class="docs-nav">
+      <a href="/docs">← Back to Docs</a>
+      <a href="/docs/inbox">Inbox →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

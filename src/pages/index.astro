@@ -16,7 +16,7 @@ import Footer from "../components/Footer.astro";
 const res = await fetch("https://api.github.com/repos/shrivatsav-org/monomail/releases/latest", {
   headers: { "User-Agent": "Monomail-Site" },
 }).catch(() => null);
-const latestTag = res?.ok ? (await res.json()).tag_name : "v1.7.9";
+const latestTag = res?.ok ? (await res.json()).tag_name : "v1.7.51";
 
 // Fetch total download count across all releases
 const releasesRes = await fetch("https://api.github.com/repos/shrivatsav-org/monomail/releases?per_page=100", {

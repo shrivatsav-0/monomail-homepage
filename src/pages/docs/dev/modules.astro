@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const depGraph = `:feature:attachment ──────┐
+:feature:compose ─────────┤
+:feature:detail ──────────┤
+:feature:inbox ───────────┤
+:feature:settings ────────┤
+:feature:auth ────────────┤
+                          ├──> :core:data ──> :core:database ──> :core:model
+                          │       │                                   │
+                          │       └──> :core:network ─────────────────┤
+                          │       └──> :core:pgp ─────────────────────┤
+                          │
+:app ─────────────────────┴──> :core:designsystem ──> :core:model`;
+
+const flavorSrc = `:core:data/src/
+  main/java/.../auth/GoogleAuthHelper.kt       // interface
+  github/java/.../auth/GoogleAuthHelperImpl.kt  // no-op
+  playstore/java/.../auth/GoogleAuthHelperImpl.kt  // real implementation`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | Multi-Module Deep Dive"
+  description="MonoMail module structure, dependency graph, module responsibilities, and flavor distribution."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Multi-Module Deep Dive</h2>
+
+    <h3>Dependency graph</h3>
+    <pre set:html={`<code>${esc(depGraph)}</code>`}></pre>
+
+    <h3>Module responsibilities</h3>
+
+    <h4><code>:core:model</code> — Pure library</h4>
+    <ul>
+      <li>No Android framework dependencies.</li>
+      <li>No plugins (no Hilt, no Compose, no KSP).</li>
+      <li>Contains: <code>Email</code>, <code>EmailThread</code>, <code>EmailAttachment</code>, <code>EmailEvent</code>, <code>AppConfig</code>, <code>InboxTab</code>, <code>StringUtils</code>, <code>EmailHtmlSafety</code>.</li>
+      <li>All other modules depend on this.</li>
+    </ul>
+
+    <h4><code>:core:designsystem</code> — Theme + components</h4>
+    <ul>
+      <li>Compose-only library (<code>kotlin.compose</code> plugin, no KSP/Hilt).</li>
+      <li>Contains: <code>MonoMailTheme</code>, <code>Color</code>, <code>Type</code>, <code>shape</code>, <code>FontFamilies</code>, <code>Animations</code>.</li>
+      <li>Shared components: <code>SlideSheet</code>, <code>AvatarCircle</code>, <code>BlurredModalOverlay</code>, <code>EmptyStateView</code>, <code>ShimmerEffect</code>, etc.</li>
+      <li>No business logic dependencies.</li>
+    </ul>
+
+    <h4><code>:core:database</code> — Room + SQLCipher</h4>
+    <ul>
+      <li>KSP for Room annotation processing.</li>
+      <li>Hilt for injectable DAOs.</li>
+      <li>Contains: <code>AppDatabase</code> (Room + SQLCipher), all entities, DAOs, <code>Converters</code>, migrations.</li>
+    </ul>
+
+    <h4><code>:core:network</code> — Retrofit + providers</h4>
+    <ul>
+      <li>Retrofit interfaces (<code>GmailApi</code>, <code>OutlookApi</code>).</li>
+      <li>Provider implementations (<code>GmailProvider</code>, <code>OutlookProvider</code>, <code>ImapProvider</code>).</li>
+      <li><code>EmailProvider</code> interface, <code>ProviderModels</code>, <code>ProviderExceptions</code>.</li>
+      <li><code>RetrofitClient</code> factory with auth interceptor.</li>
+    </ul>
+
+    <h4><code>:core:data</code> — Repository layer</h4>
+    <ul>
+      <li><code>EmailRepository</code> — central data access, bridges providers ↔ Room.</li>
+      <li><code>auth/</code> — <code>AuthManager</code>, <code>AccountManager</code>, <code>MicrosoftAuthManager</code>, <code>UserProfile</code>, <code>GoogleAuthHelper</code>.</li>
+      <li><code>settings/SettingsDataStore</code> — all app settings.</li>
+      <li><code>push/PushNotificationManager</code> — interface + flavor-specific impls.</li>
+      <li><code>worker/</code> — <code>EmailSyncWorker</code>, <code>ScheduledSendWorker</code>, <code>NotificationActionReceiver</code>.</li>
+      <li><code>attachment/AttachmentCacheManager</code> — temp file caching.</li>
+    </ul>
+
+    <h4><code>:core:pgp</code> — Encryption engine</h4>
+    <ul>
+      <li>PGPainless-based: <code>PgpManager</code> (encrypt/decrypt/sign), <code>PgpKeyManager</code> (key lifecycle), <code>PgpKeyStorage</code> (file+prefs persistence).</li>
+      <li><code>SecurityUtil</code> — AES-GCM via Android KeyStore.</li>
+    </ul>
+
+    <h4><code>:feature:*</code> modules — Feature screens</h4>
+    <ul>
+      <li>Each feature module is an Android library with Compose, KSP, and Hilt.</li>
+      <li>Contains screens, ViewModels, and any feature-specific composables.</li>
+      <li>Depends on <code>:core:data</code> and <code>:core:designsystem</code>.</li>
+      <li>Never depends on another feature module.</li>
+      <li>All navigation is owned by <code>:app</code> via <code>NavGraph.kt</code>.</li>
+    </ul>
+
+    <h3>Flavor distribution</h3>
+    <p>Every module has a <code>distribution</code> flavor dimension with <code>github</code> and <code>playstore</code> variants:</p>
+    <ul>
+      <li><strong>All modules</strong> must provide flavor-specific source sets if they differ.</li>
+      <li><strong>Module-level <code>buildConfigField</code></strong> can expose flavor-specific values.</li>
+      <li><code>:app</code> consumes the correct variant of each module automatically based on its own flavor.</li>
+    </ul>
+    <p>Flavor-specific code lives in <code>src/&#123;flavor&#125;/java/</code> within the module:</p>
+    <pre set:html={`<code>${esc(flavorSrc)}</code>`}></pre>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/architecture">← Architecture</a>
+      <a href="/docs/dev/data-layer">Data Layer →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

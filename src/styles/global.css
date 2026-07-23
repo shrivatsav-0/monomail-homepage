@@ -1161,6 +1161,190 @@ footer {
   text-underline-offset: 2px;
 }
 
+/* ── DOCS PAGES ── */
+.page-docs .docs-content {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.page-docs .docs-content h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.page-docs .docs-content h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+.page-docs .docs-content h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+.page-docs .docs-content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+.page-docs .docs-content strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.page-docs .docs-content ul,
+.page-docs .docs-content ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+.page-docs .docs-content li {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.page-docs .docs-content code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--bg-elevated);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.page-docs .docs-content pre {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+.page-docs .docs-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.page-docs .docs-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.page-docs .docs-content th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-vis);
+}
+.page-docs .docs-content td {
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.page-docs .docs-content tr:last-child td {
+  border-bottom: none;
+}
+.page-docs .docs-content blockquote {
+  border-left: 3px solid var(--border-vis);
+  padding-left: 16px;
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.page-docs .docs-content a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.page-docs .docs-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* Docs nav links */
+.docs-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.docs-nav a {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.docs-nav a:hover { color: var(--text); }
+
+/* Docs hub cards */
+.page-docs .docs-hub {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.page-docs .docs-hub h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.page-docs .docs-hub .subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+.page-docs .docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.page-docs .docs-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 24px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.page-docs .docs-card:hover {
+  border-color: var(--border-vis);
+  background: var(--bg-hover);
+}
+.page-docs .docs-card h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.page-docs .docs-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 480px) {
   .section { padding: 60px 0; }

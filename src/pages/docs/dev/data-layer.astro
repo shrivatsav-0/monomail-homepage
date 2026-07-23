@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const emailRepo = `class EmailRepository @Inject constructor(
+    private val database: AppDatabase,
+    private val providerFactory: (UserProfile) -> EmailProvider,
+    private val accountManager: AccountManager,
+    private val pendingActionDao: PendingActionDao
+)`;
+
+const folderQuery = `fun getInboxThreadsFlow(accountId: String): Flow<List<EmailThread>> =
+    threadDao.getThreadsByFolder(accountId, inInbox = true)`;
+
+const writeOp = `suspend fun archiveThread(accountId: String, threadId: String) {
+    // 1. Optimistic local update
+    threadDao.markAsArchived(threadId, accountId)
+    emailDao.markAsArchivedByThread(threadId, accountId)
+    // 2. Schedule server sync
+    insertPendingAction(ARCHIVE, accountId, threadId)
+}`;
+
+const actionQueue = `@Singleton
+class ActionQueueManager @Inject constructor(
+    private val pendingActionDao: PendingActionDao,
+    private val accountManager: AccountManager,
+    private val providerFactory: (UserProfile) -> EmailProvider
+) {
+    fun start()  // called from MonoMailApp.onCreate()
+    fun stop()   // on app shutdown
+}`;
+
+const appSettings = `data class AppSettings(
+    val themeMode: ThemeMode = ThemeMode.SYSTEM,
+    val fontScale: FontScale = FontScale.DEFAULT,
+    val showDividers: Boolean = false,
+    val compactList: Boolean = false,
+    val showSnippet: Boolean = true,
+    val swipeLeftAction: SwipeAction = SwipeAction.READ_UNREAD,
+    val swipeRightAction: SwipeAction = SwipeAction.ARCHIVE,
+    val confirmBeforeSending: Boolean = false,
+    val defaultReply: DefaultReply = DefaultReply.REPLY,
+    val emailNotifications: Boolean = true,
+    val syncFrequency: SyncFrequency = SyncFrequency.MIN_15,
+    val unifiedInbox: Boolean = false,
+    val smartGrouping: Boolean = true,
+    val groupRecentOnly: Boolean = true,
+    val organizeByThread: Boolean = true,
+    val loadRemoteImages: Boolean = true,
+    val renderMarkdown: Boolean = false,
+    val navScale: Float = 1.0f,
+    val undoSendEnabled: Boolean = true,
+    val undoSendWindow: UndoSendWindow = UndoSendWindow.SEC_10,
+    val dockConfig: DockConfig = DockConfig(),
+    val hasSeenWelcomePrompt: Boolean = false,
+    val hasDismissedUpdatePrompt: Boolean = false,
+    val lastKnownVersion: String = ""
+)`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | Data Layer"
+  description="MonoMail data layer — Room database, EmailRepository, ActionQueueManager, and SettingsDataStore."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Data Layer</h2>
+
+    <h3>Room Database (<code>:core:database</code>)</h3>
+    <table>
+      <tr><th>Entity</th><th>Table</th><th>Key</th><th>Purpose</th></tr>
+      <tr><td><code>ThreadEntity</code></td><td><code>threads</code></td><td><code>threadId</code> (PK)</td><td>Thread-level metadata</td></tr>
+      <tr><td><code>EmailEntity</code></td><td><code>emails</code></td><td><code>id</code> (PK)</td><td>Individual email messages</td></tr>
+      <tr><td><code>ScheduledMessageEntity</code></td><td><code>scheduled_messages</code></td><td><code>id</code> (PK)</td><td>Scheduled sends</td></tr>
+      <tr><td><code>PendingActionEntity</code></td><td><code>pending_actions</code></td><td><code>id</code> (PK)</td><td>Optimistic write queue</td></tr>
+    </table>
+
+    <p>Current schema version: <strong>12</strong> (10 migrations from v2 → v12).</p>
+
+    <h4>Migration strategy</h4>
+    <ul>
+      <li><code>MIGRATION_2_3</code> through <code>MIGRATION_7_8</code>: incremental column additions</li>
+      <li><code>MIGRATION_8_9</code>: new table (<code>pending_actions</code>)</li>
+      <li><code>MIGRATION_9_10</code>: new column (<code>bodyIsHtml</code>)</li>
+      <li><code>MIGRATION_10_11</code>: new column (<code>fromAlias</code>)</li>
+      <li><code>MIGRATION_11_12</code>: composite indices for performance</li>
+    </ul>
+
+    <h3>EmailRepository (<code>:core:data</code>)</h3>
+    <p>This is the central nervous system:</p>
+    <pre set:html={`<code>${esc(emailRepo)}</code>`}></pre>
+
+    <h4>Folder queries</h4>
+    <p>Use Room Flow queries with composite indices on <code>(accountId, folder, date)</code>:</p>
+    <pre set:html={`<code>${esc(folderQuery)}</code>`}></pre>
+
+    <h4>Write operations</h4>
+    <p>Follow this pattern:</p>
+    <pre set:html={`<code>${esc(writeOp)}</code>`}></pre>
+    <p><code>insertPendingAction</code> creates a <code>PendingActionEntity</code> row. The <code>ActionQueueManager</code> processes it against the server.</p>
+
+    <h3>ActionQueueManager (<code>:app</code>)</h3>
+    <pre set:html={`<code>${esc(actionQueue)}</code>`}></pre>
+    <ul>
+      <li>Polls <code>PendingActionDao.getNextPending()</code> every 2 seconds.</li>
+      <li>Processes one action at a time against the correct provider.</li>
+      <li>Retries up to 5 times with <code>incrementRetry()</code>.</li>
+      <li>Marks as <code>FAILED</code> on <code>AuthFailedException</code> or max retries.</li>
+      <li>Exposes <code>getPendingFlow()</code> and <code>getFailedCountFlow()</code> for UI.</li>
+    </ul>
+
+    <h3>SettingsDataStore</h3>
+    <p>All settings in one <code>AppSettings</code> data class, persisted as DataStore Preferences:</p>
+    <pre set:html={`<code>${esc(appSettings)}</code>`}></pre>
+    <p>Also stores: <code>emailTemplates</code> (list as JSON), <code>accountNotificationSettings</code> (per account).</p>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/modules">← Multi-Module</a>
+      <a href="/docs/dev/ui-layer">UI Layer →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

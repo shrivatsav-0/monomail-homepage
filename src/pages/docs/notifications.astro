@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Notifications & Sync"
+  description="Background sync, push notifications, and notification actions in MonoMail."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Notifications & Background Sync</h2>
+
+    <h3>Sync architecture</h3>
+    <p>MonoMail uses two sync mechanisms:</p>
+    <ol>
+      <li><strong>Foreground polling</strong> — every ~2 minutes when the app is visible (lifecycle-aware)</li>
+      <li><strong>Background sync</strong> — via WorkManager at the configured interval (15 min / 30 min / 1 hour / Manual)</li>
+    </ol>
+    <p>When the app goes to background, a quick adaptive sync is scheduled with a 1-minute delay.</p>
+
+    <h3>Push notifications</h3>
+    <table>
+      <tr><th>Build</th><th>Push method</th></tr>
+      <tr><td><strong>Play Store</strong></td><td>Firebase Cloud Messaging (FCM). The push relay server (Cloudflare Workers) forwards notifications from Gmail/Outlook webhooks.</td></tr>
+      <tr><td><strong>GitHub</strong></td><td>Push is disabled (no FCM configured). Relies on periodic WorkManager polling.</td></tr>
+    </table>
+
+    <h3>Notification content</h3>
+    <p>Each notification shows:</p>
+    <ul>
+      <li>Sender name</li>
+      <li>Subject line</li>
+      <li>System email icon</li>
+      <li>Per-account notification channel (separate channel per account)</li>
+    </ul>
+
+    <h3>Notification actions</h3>
+    <table>
+      <tr><th>Action</th><th>Description</th></tr>
+      <tr><td><strong>Inline reply</strong></td><td>Reply directly from the notification shade via RemoteInput</td></tr>
+      <tr><td><strong>Archive</strong></td><td>Archive the thread from the notification</td></tr>
+      <tr><td><strong>Undo</strong></td><td>After archiving, a follow-up notification offers undo</td></tr>
+    </table>
+
+    <h3>Per-account settings</h3>
+    <p>Configure sound and vibration per account. Each account gets its own notification channel on Android 8+.</p>
+
+    <h3>How often does the app sync?</h3>
+    <table>
+      <tr><th>State</th><th>Interval</th></tr>
+      <tr><td>Foreground (app visible)</td><td>Every ~2 minutes</td></tr>
+      <tr><td>Background</td><td>At the interval set in Settings → Notifications → Sync Frequency (default 15 min)</td></tr>
+      <tr><td>After push notification</td><td>Immediately (Play Store build only)</td></tr>
+      <tr><td>After closing the app</td><td>Quick sync with 1-minute delay</td></tr>
+    </table>
+
+    <div class="docs-nav">
+      <a href="/docs/pgp">← PGP Encryption</a>
+      <a href="/docs/settings">Settings →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

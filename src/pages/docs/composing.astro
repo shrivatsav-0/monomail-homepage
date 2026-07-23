@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Composing & Sending"
+  description="Compose, format, attach files, schedule send, and use templates in MonoMail."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Composing & Sending Email</h2>
+
+    <h3>Opening the composer</h3>
+    <table>
+      <tr><th>Method</th><th>Mode</th><th>Pre-filled</th></tr>
+      <tr><td>Tap compose FAB (inbox)</td><td>NEW</td><td>—</td></tr>
+      <tr><td>Tap <strong>Reply</strong> in thread</td><td>REPLY</td><td>To, subject (Re:), original body quoted</td></tr>
+      <tr><td>Tap <strong>Forward</strong> in thread</td><td>FORWARD</td><td>Subject (Fwd:), original body quoted</td></tr>
+      <tr><td>Tap scheduled message</td><td>EDIT</td><td>All saved fields</td></tr>
+      <tr><td>Tap a template from compose</td><td>—</td><td>Subject + body (if blank)</td></tr>
+    </table>
+
+    <h3>Compose toolbar</h3>
+    <p>The WebView-based HTML editor has a formatting toolbar:</p>
+    <table>
+      <tr><th>Button</th><th>Command</th></tr>
+      <tr><td><strong>Bold</strong></td><td><code>bold</code></td></tr>
+      <tr><td><strong>Italic</strong></td><td><code>italic</code></td></tr>
+      <tr><td><strong>Underline</strong></td><td><code>underline</code></td></tr>
+      <tr><td><strong>Bullet list</strong></td><td><code>insertUnorderedList</code></td></tr>
+      <tr><td><strong>Numbered list</strong></td><td><code>insertOrderedList</code></td></tr>
+      <tr><td><strong>Quote</strong></td><td><code>formatBlock</code> for <code>&lt;blockquote&gt;</code></td></tr>
+    </table>
+    <p>Active format states are tracked: buttons are highlighted when the format at the cursor is active.</p>
+
+    <h3>Sending</h3>
+    <ol>
+      <li>Fill in To, Subject, and body.</li>
+      <li>Optionally add Cc/Bcc (tap to expand), attachments, or schedule.</li>
+      <li>Tap the <strong>Send</strong> button in the floating bottom bar.</li>
+      <li>If "Confirm Before Sending" is enabled (Settings → Compose), a dialog appears.</li>
+      <li>An animated <strong>"Sent!"</strong> overlay appears with a spring scale/fade animation, auto-dismissing after 1.5s.</li>
+    </ol>
+
+    <h3>Send-as aliases</h3>
+    <p>If your account has multiple send-as addresses configured (in Gmail or Outlook settings), a "From" field with a dropdown arrow appears at the top of the compose screen. Tap to pick which address to send from.</p>
+
+    <h3>Attachments</h3>
+    <ul>
+      <li><strong>Adding:</strong> Tap the attach icon (paperclip) in the bottom bar → system file picker → any MIME type.</li>
+      <li><strong>Display:</strong> Shown as a horizontal scrollable row of preview cards. Images show a thumbnail; other files show an icon + filename + size.</li>
+      <li><strong>Removing:</strong> Tap the close button on any attachment preview.</li>
+      <li><strong>Compatibility:</strong> Attachments are base64-encoded and sent as multipart MIME.</li>
+    </ul>
+
+    <h3>Viewing attachments</h3>
+    <p>Attachments in received emails are shown in two sections: images as inline thumbnails (max 280dp height), and files in a responsive grid with extension badge, filename, and size. MonoMail includes an in-app viewer for images (pinch-to-zoom), PDFs (PdfRenderer), and videos (Media3 ExoPlayer). Other file types show file info with an "Open with..." button.</p>
+
+    <h3>Schedule send</h3>
+    <ol>
+      <li>Tap the schedule icon (clock) in the bottom bar.</li>
+      <li>Pick a date (DatePicker dialog) and then a time (24-hour TimePicker).</li>
+      <li>The email is saved to the local database and sent automatically at the scheduled time.</li>
+      <li>View/edit/cancel scheduled messages by tapping the calendar badge in the inbox search bar.</li>
+    </ol>
+
+    <h3>Undo send</h3>
+    <p>After sending, an undo bar appears in the inbox with a live countdown (configurable: 5s, 10s, 20s, or 30s). Tap <strong>Undo</strong> to cancel the send. Configure in <strong>Settings → Compose → Undo Send</strong>.</p>
+
+    <h3>PGP encryption and signing</h3>
+    <p>If PGP keys are available, a <strong>lock icon</strong> (encrypt) and <strong>pen icon</strong> (sign) appear in the compose toolbar. Encryption uses stored public keys for each recipient. See <a href="/docs/pgp">PGP Encryption</a> for details.</p>
+
+    <h3>Contact suggestions</h3>
+    <p>As you type in the To field, suggestions appear after a 200ms debounce. Indexed from your stored emails. Case-insensitive prefix search, max 5 results.</p>
+
+    <h3>Email templates</h3>
+    <p>Save frequently-used bodies as templates. Access from the compose toolbar. Manage (add, edit, delete) in <strong>Settings → Compose → Templates</strong>. Tap a template to fill the subject and body (only if they're currently blank).</p>
+
+    <div class="docs-nav">
+      <a href="/docs/inbox">← Inbox</a>
+      <a href="/docs/multi-account">Multi-Account →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

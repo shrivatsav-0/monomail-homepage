@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const versionCatalog = `[versions]
+agp = "9.2.1"
+kotlin = "2.2.10"
+composeBom = "2026.02.01"
+hilt = "2.59.2"
+room = "2.7.1"
+# ... 35+ entries
+
+[libraries]
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+# ... 50+ entries
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }`;
+
+const flavorDimensions = `flavorDimensions += "distribution"
+productFlavors {
+    create("github") { dimension = "distribution" }
+    create("playstore") { dimension = "distribution" }
+}`;
+
+const proguardRules = `# Keep MSAL OAuth
+-keep class com.microsoft.identity.common.** { *; }
+
+# Keep SQLCipher
+-keep class net.zetetic.database.sqlcipher.** { *; }
+
+# Keep Jakarta Mail
+-keep class org.eclipse.angus.mail.** { *; }
+-keep class jakarta.mail.** { *; }
+-keep class jakarta.activation.** { *; }
+
+# Keep PGPainless / Bouncy Castle
+-keep class org.pgpainless.** { *; }
+-keep class org.bouncycastle.** { *; }
+
+# Keep data classes (Gson serialization)
+-keep class com.shrivatsav.monomail.core.data.auth.UserProfile { *; }
+-keep class com.shrivatsav.monomail.core.network.provider.imap.ImapAccountConfig { *; }
+-keep class com.shrivatsav.monomail.core.database.local.ScheduledMessageEntity { *; }
+-keep class com.shrivatsav.monomail.data.model.EmailAttachment { *; }
+-keep class com.shrivatsav.monomail.data.model.EmailAttachmentInfo { *; }
+-keep class com.shrivatsav.monomail.core.database.local.PendingActionEntity { *; }`;
+---
+
+<BaseLayout
+  title="Monomail | Build System & Flavors"
+  description="MonoMail build system — version catalog, flavor dimensions, ProGuard rules, and dev build toggle."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Build System & Flavors</h2>
+
+    <h3>Version catalog</h3>
+    <p>All dependencies are managed via <code>gradle/libs.versions.toml</code> (Gradle version catalog):</p>
+    <pre set:html={`<code>${versionCatalog.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code>`}></pre>
+
+    <h3>Flavor dimensions</h3>
+    <p>Single dimension <code>distribution</code> across ALL modules:</p>
+    <pre set:html={`<code>${flavorDimensions.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code>`}></pre>
+
+    <table>
+      <tr><th>Flavor</th><th>Characteristics</th></tr>
+      <tr><td><code>github</code></td><td>Empty <code>GOOGLE_CLIENT_ID</code>, <code>IS_GITHUB_BUILD=true</code>, disabled push (no FCM), no-op <code>GoogleAuthHelperImpl</code></td></tr>
+      <tr><td><code>playstore</code></td><td>Actual client ID from <code>secrets.properties</code>, FCM push enabled, real <code>GoogleAuthHelperImpl</code></td></tr>
+    </table>
+
+    <h3>Dev build toggle</h3>
+    <p>Release builds can be disabled locally:</p>
+    <pre><code># local.properties
+devBuild=true</code></pre>
+    <p>This skips release variants via <code>androidComponents.beforeVariants</code>.</p>
+
+    <h3>ProGuard / R8</h3>
+    <p>Release builds use <code>minifyEnabled = true</code>, <code>shrinkResources = true</code>. Key ProGuard rules:</p>
+    <pre set:html={`<code>${proguardRules.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code>`}></pre>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/di">← Dependency Injection</a>
+      <a href="/docs/dev/adding-feature">Adding a Feature →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

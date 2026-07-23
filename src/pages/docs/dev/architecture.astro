@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const offlineFirst = `                  +------------------+
+                  |   EmailProvider  |  (Gmail/Outlook/IMAP API)
+                  +--------+---------+
+                           |
+                    (background sync)
+                           |
++--------+     +-----------v-----------+     +-------------------+
+|  Room  | <---+   EmailRepository    +---->  PendingActionQueue |
+|  (DB)  |     |  (single source of   |     |  (ActionQueueMgr) |
++--------+     |   truth for UI)      |     +-------------------+
+    ^          +-----------+----------+            |
+    |                      |                       |
+    |               (Flow queries)           (sequential retry)
+    |                      |
++---+----+         +------v------+
+|  ViewModel        |    View     |
+| (collectAsState)  |  (Compose)  |
++---------+         +-------------+`;
+
+const reactiveFlow = `SettingsDataStore.settingsFlow (DataStore Preferences)
+  └─> ViewModel collects as StateFlow
+       └─> Composable collects as state via collectAsState()
+            └─> Recomposition on any change`;
+
+const providerInterface = `interface EmailProvider {
+    val providerName: String
+    suspend fun listThreads(folder: EmailFolder, pageToken: String?): ProviderThreadListResult
+    suspend fun getThread(threadId: String): ProviderThread
+    suspend fun sendEmail(...)
+    suspend fun archiveThread(threadId: String)
+    suspend fun toggleStar(threadId: String)
+    // ... etc
+}`;
+
+const sessionRestore = `// Phase A — synchronous, instant, no network
+val hasSession = authManager.restoreSessionQuick()  // reads encrypted DataStore
+// Phase B — background, involves token refresh + push registration
+scope.launch { authManager.restoreSession() }`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | Architecture Patterns"
+  description="MonoMail architecture — offline-first design, reactive data flow, provider pattern, and session restore."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Architecture Patterns</h2>
+
+    <h3>Offline-first</h3>
+    <p>MonoMail uses a strict offline-first pattern:</p>
+    <pre set:html={`<code>${esc(offlineFirst)}</code>`}></pre>
+
+    <p><strong>Rules:</strong></p>
+    <ul>
+      <li><strong>All reads</strong> from Room DB via reactive <code>Flow</code> queries. The UI never reads from the network directly.</li>
+      <li><strong>All writes</strong> are optimistic: update Room immediately, then sync to server via <code>PendingActionEntity</code>.</li>
+      <li><strong><code>ActionQueueManager</code></strong> processes pending actions sequentially, retries up to 5× with 2s polling.</li>
+      <li><strong><code>EmailRepository.refreshInbox()</code></strong> fetches from provider and upserts into Room. Called on pull-to-refresh or periodic sync.</li>
+    </ul>
+
+    <h3>Reactive data flow</h3>
+    <pre set:html={`<code>${esc(reactiveFlow)}</code>`}></pre>
+    <p>All <code>ViewModel</code> → <code>Composable</code> communication uses <code>StateFlow</code>. One-shot events (<code>SentEmailEvent</code>, <code>ScheduledEmailEvent</code>) use <code>SharedFlow</code> with replay.</p>
+
+    <h3>Provider pattern</h3>
+    <p>The <code>EmailProvider</code> interface abstracts all email backends:</p>
+    <pre set:html={`<code>${esc(providerInterface)}</code>`}></pre>
+    <p>Implementations:</p>
+    <ul>
+      <li><code>GmailProvider</code> — Retrofit + Gmail REST API v1</li>
+      <li><code>OutlookProvider</code> — Retrofit + Microsoft Graph API</li>
+      <li><code>ImapProvider</code> — Eclipse Angus Mail (Jakarta Mail 2.x)</li>
+    </ul>
+    <p>A <code>ProviderFactory</code> lambda (injected via Hilt) resolves the correct provider for a given <code>UserProfile</code>.</p>
+
+    <h3>Two-phase session restore</h3>
+    <pre set:html={`<code>${esc(sessionRestore)}</code>`}></pre>
+    <p>Phase A determines the start destination. Phase B runs after the first frame.</p>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/setup">← Setup</a>
+      <a href="/docs/dev/modules">Multi-Module →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

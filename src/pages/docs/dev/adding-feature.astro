@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const buildGradle = `plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+}
+
+android {
+    namespace = "com.shrivatsav.monomail.feature.newfeature"
+    compileSdk = 37
+
+    defaultConfig {
+        minSdk = 26
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    flavorDimensions += "distribution"
+
+    productFlavors {
+        create("github") { dimension = "distribution" }
+        create("playstore") { dimension = "distribution" }
+    }
+
+    buildFeatures { compose = true }
+}
+
+dependencies {
+    implementation(project(":core:model"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:data"))
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+}`;
+
+const navGraph = `sealed class Screen(val route: String) {
+    object NewFeature : Screen("new_feature")
+}
+
+// In NavGraph composable block:
+composable(Screen.NewFeature.route) {
+    NewFeatureScreen(
+        onBack = { navController.popBackStack() }
+    )
+}`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | Adding a Feature"
+  description="Step-by-step guide for creating a new feature module in MonoMail."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Adding a New Feature</h2>
+
+    <h3>1. Create the feature module</h3>
+    <pre><code>feature/newfeature/
+├── build.gradle.kts
+└── src/main/java/com/shrivatsav/monomail/feature/newfeature/
+    └── NewFeatureScreen.kt</code></pre>
+
+    <p><code>build.gradle.kts</code> template:</p>
+    <pre set:html={`<code>${esc(buildGradle)}</code>`}></pre>
+
+    <h3>2. Register in settings.gradle.kts</h3>
+    <pre><code>include(":feature:newfeature")</code></pre>
+
+    <h3>3. Add to :app dependencies</h3>
+    <pre set:html={`<code>${esc(`// app/build.gradle.kts\ndependencies {\n    implementation(project(":feature:newfeature"))\n}`)}</code>`}></pre>
+
+    <h3>4. Create the screen</h3>
+    <p>Follow the standard screen pattern: sealed class state in ViewModel, <code>@HiltViewModel</code> with <code>@Inject</code> constructor, Composable function with viewModel parameter and nav callbacks.</p>
+
+    <h3>5. Add a NavGraph route</h3>
+    <pre set:html={`<code>${esc(navGraph)}</code>`}></pre>
+
+    <h3>6. Wire DI if needed</h3>
+    <p>If the new feature needs new singleton providers, add them to the appropriate DI module in <code>:app/di/</code> or create a new one.</p>
+
+    <h3>7. Flavor-specific logic</h3>
+    <p>If the feature differs between <code>github</code> and <code>playstore</code>:</p>
+    <ul>
+      <li>Define an interface in <code>main/</code>.</li>
+      <li>Provide implementations in <code>github/</code> and <code>playstore/</code> source sets.</li>
+      <li>Use <code>@Binds</code> in a DI module to bind the interface.</li>
+    </ul>
+
+    <h3>8. Add a settings entry (if applicable)</h3>
+    <p>Add a <code>SettingsCard</code> in <code>SettingsScreen.kt</code> that navigates to the new route.</p>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/build-system">← Build System</a>
+      <a href="/docs/dev/testing">Testing →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

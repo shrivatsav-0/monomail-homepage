@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const appModule = `@Module @InstallIn(SingletonComponent::class)
+object AppModule {
+    @Provides @Singleton
+    fun provideAccountManager(...): AccountManager
+
+    @Provides @Singleton
+    fun provideAuthManager(...): AuthManager
+
+    @Provides @Singleton
+    fun provideSettingsDataStore(...): SettingsDataStore
+
+    @Provides @Singleton
+    fun provideProviderFactory(...): (UserProfile) -> EmailProvider  // cached lambda
+
+    @Provides @Singleton
+    fun provideEmailRepository(...): EmailRepository
+
+    @Provides @Singleton
+    fun provideContactSuggestionProvider(...): ContactSuggestionProvider
+
+    @Provides @Singleton
+    fun provideContactPhotoProvider(...): ContactPhotoProvider
+
+    @Provides @Singleton
+    fun provideAttachmentCacheManager(...): AttachmentCacheManager
+}`;
+
+const dbModule = `@Module @InstallIn(SingletonComponent::class)
+object DatabaseModule {
+    @Provides @Singleton
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase
+
+    @Provides fun provideThreadDao(db: AppDatabase): ThreadDao
+    @Provides fun provideEmailDao(db: AppDatabase): EmailDao
+    @Provides fun provideScheduledMessageDao(db: AppDatabase): ScheduledMessageDao
+    @Provides fun providePendingActionDao(db: AppDatabase): PendingActionDao
+}`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | Dependency Injection"
+  description="MonoMail DI — Hilt modules, singleton providers, and cross-module injection."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>DI & Dependency Injection</h2>
+
+    <p>Hilt is used throughout. Key modules in <code>:app/di/</code>:</p>
+
+    <h3>AppModule</h3>
+    <pre set:html={`<code>${esc(appModule)}</code>`}></pre>
+
+    <h3>DatabaseModule</h3>
+    <pre set:html={`<code>${esc(dbModule)}</code>`}></pre>
+
+    <h3>Cross-module injection</h3>
+    <p>Modules cannot see each other's internal DI. Each module's Hilt module (if any) is installed at the <code>:app</code> level or via the module's own <code>@Module @InstallIn</code>.</p>
+    <p>For core modules (e.g., <code>:core:pgp</code>), the <code>PgpModule.kt</code> lives in <code>:app</code> and provides the PGP classes as singletons. The module itself (<code>:core:pgp</code>) has no Hilt module — it just provides the classes for <code>:app</code> to wire up.</p>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/ui-layer">← UI Layer</a>
+      <a href="/docs/dev/build-system">Build System →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

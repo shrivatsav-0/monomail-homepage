@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Multi-Account"
+  description="Manage multiple email accounts, switch between them, and use the unified inbox in MonoMail."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Multi-Account & Unified Inbox</h2>
+
+    <h3>Adding accounts</h3>
+    <ul>
+      <li>Up to 10 accounts supported</li>
+      <li>Mix Gmail, Outlook, and IMAP/SMTP freely</li>
+      <li>Each account has independent OAuth or IMAP credentials</li>
+      <li>Account credentials encrypted with AES-GCM via Android KeyStore</li>
+    </ul>
+
+    <h3>Switching accounts</h3>
+    <p>Three ways:</p>
+    <ol>
+      <li><strong>Profile card</strong> — tap your avatar in the top-left to open the account switcher</li>
+      <li><strong>Horizontal swipe</strong> — swipe horizontally on the profile avatar to cycle through accounts</li>
+      <li><strong>Quick switch</strong> — tap the account name in the profile card to show the account list</li>
+    </ol>
+
+    <h3>The profile card</h3>
+    <p>Tap your avatar to open:</p>
+    <ul>
+      <li>Current account avatar, display name, and email</li>
+      <li>Number of linked accounts</li>
+      <li><strong>Settings</strong> button</li>
+      <li><strong>Sign Out</strong> button</li>
+      <li><strong>Add Account</strong> button</li>
+      <li>Account list for quick switching (horizontal scroll)</li>
+    </ul>
+
+    <h3>Unified Inbox</h3>
+    <p>Enable in <strong>Settings → Navigation → Unified Inbox</strong> (requires 2+ accounts). Adds a <strong>Unified</strong> tab to the dock bar that combines all accounts into a single feed. The Unified tab is automatically removed from the dock bar when the feature is disabled.</p>
+
+    <h3>Account management</h3>
+
+    <h4>Google Sign-In</h4>
+    <p>Uses Android Credential Manager API for identity, then <code>GoogleAuthUtil.getToken()</code> for Gmail OAuth2 token. Token refresh is automatic.</p>
+    <p><strong>Troubleshooting:</strong> If you see "No Google account found", ensure you have a Google account added in <strong>Settings → Accounts</strong> on your device.</p>
+
+    <h4>Microsoft Sign-In</h4>
+    <p>Uses MSAL 5.4.0 with <code>MultipleAccountPublicClientApplication</code>. Opens browser-based auth. Supports silent token refresh.</p>
+
+    <h4>IMAP/SMTP Setup</h4>
+    <p>Manual configuration required. Presets available for Gmail, Outlook, Yahoo, Zoho, and Custom.</p>
+    <table>
+      <tr><th>Field</th><th>Description</th></tr>
+      <tr><td><strong>Provider</strong></td><td>Dropdown with presets that auto-fill host/port/SSL</td></tr>
+      <tr><td><strong>IMAP host</strong></td><td>e.g., <code>imap.gmail.com</code></td></tr>
+      <tr><td><strong>IMAP port</strong></td><td>Typically 993 (SSL) or 143 (STARTTLS)</td></tr>
+      <tr><td><strong>SMTP host</strong></td><td>e.g., <code>smtp.gmail.com</code></td></tr>
+      <tr><td><strong>SMTP port</strong></td><td>Typically 465 (SSL) or 587 (STARTTLS)</td></tr>
+      <tr><td><strong>Username</strong></td><td>Your email address</td></tr>
+      <tr><td><strong>Password</strong></td><td>Stored encrypted via Android KeyStore AES-GCM</td></tr>
+    </table>
+    <p>A <strong>connection test</strong> validates IMAP and SMTP settings before saving.</p>
+
+    <h3>Session restoration</h3>
+    <p>On app launch, session restoration is two-phase:</p>
+    <ol>
+      <li><strong>Phase A (quick):</strong> Reads cached auth state from encrypted DataStore synchronously. No blocking on network. Used for instant splash dismissal.</li>
+      <li><strong>Phase B (background):</strong> Same as Phase A, plus token refresh and push registration. Runs after the first frame.</li>
+    </ol>
+
+    <h3>Sign out</h3>
+    <ul>
+      <li>Signing out clears OAuth tokens and unregisters from push notifications.</li>
+      <li>If no accounts remain, all local data is wiped.</li>
+      <li>Multiple accounts can be signed out individually or all at once.</li>
+    </ul>
+
+    <h3>Performance warning</h3>
+    <p>When adding a 4th+ account, a dialog appears advising of potential performance impact on resource-constrained devices.</p>
+
+    <div class="docs-nav">
+      <a href="/docs/composing">← Composing</a>
+      <a href="/docs/pgp">PGP Encryption →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

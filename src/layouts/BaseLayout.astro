@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import DownloadModal from "../components/DownloadModal.astro";
 
 export interface Props {
   title?: string;
@@ -73,7 +74,7 @@ const ogImageURL = new URL("/imgs/ss.png", Astro.site).href;
       "applicationCategory": "CommunicationApplication",
       "operatingSystem": "Android 8.0+",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "softwareVersion": "1.7.9",
+      "softwareVersion": "1.7.44",
       "screenshot": ogImageURL,
       "downloadUrl": "https://github.com/shrivatsav-org/monomail/releases/latest",
       "softwareHelp": { "@type": "CreativeWork", "url": "https://monomail.millosaurs.me" },
@@ -88,5 +89,6 @@ const ogImageURL = new URL("/imgs/ss.png", Astro.site).href;
   </head>
   <body class={pageClass}>
     <slot />
+    <DownloadModal />
   </body>
 </html>

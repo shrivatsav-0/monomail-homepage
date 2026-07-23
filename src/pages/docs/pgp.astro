@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | PGP Encryption"
+  description="End-to-end PGP encryption and signing for your emails in MonoMail."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>PGP Encryption</h2>
+
+    <h3>What is PGP?</h3>
+    <p>Pretty Good Privacy (PGP) provides end-to-end encryption for email. Only the intended recipient can decrypt the message. MonoMail also supports cryptographic signing to verify the sender's identity.</p>
+
+    <h3>Key management</h3>
+    <p>Access from <strong>Settings → PGP Keys</strong>. You can:</p>
+    <ul>
+      <li><strong>Generate</strong> a new Ed25519 (signing) + X25519 (encryption) key pair. Optionally protect with a passphrase.</li>
+      <li><strong>Import</strong> an existing ASCII-armored PGP key (public or private). Optionally provide the passphrase.</li>
+      <li><strong>Export</strong> a public key — copies the armored key to clipboard for sharing.</li>
+      <li><strong>Delete</strong> a key — removes private key, public key, and metadata.</li>
+    </ul>
+
+    <h3>Encrypting outgoing email</h3>
+    <ol>
+      <li>Import or generate a PGP key pair.</li>
+      <li>Import the recipient's public key (or generate one for them if you control both ends).</li>
+      <li>In the compose screen, tap the <strong>lock icon</strong> (encrypt) in the toolbar.</li>
+      <li>When you send, the body is encrypted for all recipients using their stored public keys.</li>
+      <li>Optionally, tap the <strong>pen icon</strong> (sign) to also sign the message cryptographically.</li>
+    </ol>
+
+    <h3>Receiving encrypted email</h3>
+    <ol>
+      <li>Incoming PGP/MIME and inline PGP messages are detected automatically.</li>
+      <li>If you have the corresponding private key, the email is decrypted transparently.</li>
+      <li>A <strong>green lock badge</strong> appears below the body if decryption succeeded.</li>
+      <li>A <strong>signature badge</strong> shows whether the signature is valid and who signed it.</li>
+      <li>If decryption fails (missing key, wrong passphrase), a "PGP Encrypted" placeholder is shown.</li>
+    </ol>
+
+    <h3>Key storage</h3>
+    <table>
+      <tr><th>Data</th><th>Storage</th></tr>
+      <tr><td>Private keys</td><td>ASCII-armored files, encrypted via Android KeyStore AES-GCM</td></tr>
+      <tr><td>Public keys</td><td>Plain ASCII-armored files</td></tr>
+      <tr><td>Passphrases</td><td>Encrypted blobs on disk</td></tr>
+      <tr><td>Metadata</td><td>EncryptedSharedPreferences (fingerprint, algorithm, creation date)</td></tr>
+    </table>
+
+    <h3>Exporting a public key</h3>
+    <ol>
+      <li>Go to <strong>Settings → PGP Keys</strong>.</li>
+      <li>Find the key and tap <strong>Export</strong>.</li>
+      <li>The armored key is shown in a dialog with a <strong>Copy</strong> button.</li>
+      <li>Share the copied key with your contact.</li>
+    </ol>
+
+    <div class="docs-nav">
+      <a href="/docs/multi-account">← Multi-Account</a>
+      <a href="/docs/notifications">Notifications →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

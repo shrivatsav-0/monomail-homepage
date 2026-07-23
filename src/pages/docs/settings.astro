@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Settings Reference"
+  description="Complete settings reference for MonoMail — every setting explained, category by category."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Settings Reference</h2>
+    <p>Settings uses a hub-and-spoke architecture: a hub screen shows category cards, each navigating to a dedicated sub-screen.</p>
+
+    <h3>Appearance</h3>
+    <table>
+      <tr><th>Setting</th><th>Options</th><th>Default</th><th>Description</th></tr>
+      <tr><td>Theme</td><td>System / Light / Dark</td><td>System</td><td>Colour scheme; animated spring segmented control</td></tr>
+      <tr><td>Font Size</td><td>Extra Small / Small / Default / Large / Extra Large</td><td>Default</td><td>Scales UI text 0.7x to 1.3x with live preview</td></tr>
+      <tr><td>Show Dividers</td><td>On / Off</td><td>Off</td><td>Lines between email items in the inbox</td></tr>
+      <tr><td>Compact List</td><td>On / Off</td><td>Off</td><td>Reduced spacing in the email list</td></tr>
+      <tr><td>Show Snippet Preview</td><td>On / Off</td><td>On</td><td>Preview text below sender name in the inbox</td></tr>
+      <tr><td>Load Remote Images</td><td>On / Off</td><td>On</td><td>Block external images in email bodies (per-email override)</td></tr>
+      <tr><td>Render Markdown</td><td>On / Off</td><td>Off</td><td>Convert markdown formatting in plain-text emails</td></tr>
+    </table>
+
+    <h3>Inbox</h3>
+    <table>
+      <tr><th>Setting</th><th>Options</th><th>Default</th><th>Description</th></tr>
+      <tr><td>Conversation View</td><td>On / Off</td><td>On</td><td>Collapsible threads; Off = expanded message chain</td></tr>
+      <tr><td>Smart Grouping</td><td>On / Off</td><td>On</td><td>Auto-group threads by sender</td></tr>
+      <tr><td>Group Recent Only</td><td>On / Off</td><td>On</td><td>If on, groups within 24hr; otherwise 3 days</td></tr>
+      <tr><td>Swipe Left Action</td><td>Archive / Star / Delete / Mark Read/Unread</td><td>Mark Read/Unread</td><td>Gesture action for left swipe</td></tr>
+      <tr><td>Swipe Right Action</td><td>Archive / Star / Delete / Mark Read/Unread</td><td>Archive</td><td>Gesture action for right swipe</td></tr>
+    </table>
+
+    <h3>Compose</h3>
+    <table>
+      <tr><th>Setting</th><th>Options</th><th>Default</th><th>Description</th></tr>
+      <tr><td>Default Reply</td><td>Reply / Reply All</td><td>Reply</td><td>Default reply mode</td></tr>
+      <tr><td>Confirm Before Sending</td><td>On / Off</td><td>Off</td><td>Show confirmation dialog before send</td></tr>
+      <tr><td>Undo Send</td><td>On / Off</td><td>On</td><td>Show undo bar after sending</td></tr>
+      <tr><td>Undo Send Window</td><td>5s / 10s / 20s / 30s</td><td>10s</td><td>Countdown duration for undo</td></tr>
+      <tr><td>Templates</td><td>(manage list)</td><td>—</td><td>Saved email bodies; add/edit/delete</td></tr>
+    </table>
+
+    <h3>Navigation</h3>
+    <table>
+      <tr><th>Setting</th><th>Options</th><th>Default</th><th>Description</th></tr>
+      <tr><td>Unified Inbox</td><td>On / Off</td><td>Off</td><td>Combine all accounts in one tab (disabled when &lt; 2 accounts)</td></tr>
+      <tr><td>Nav Size</td><td>Slider 0.6x – 1.4x</td><td>1.0x</td><td>Scales dock bar and action buttons</td></tr>
+      <tr><td>Dock Bar Editor</td><td>(reorder / add / remove)</td><td>Inbox, Sent, Archived</td><td>Configure primary tabs (max 4, min 1)</td></tr>
+    </table>
+
+    <h3>Notifications</h3>
+    <table>
+      <tr><th>Setting</th><th>Options</th><th>Default</th><th>Description</th></tr>
+      <tr><td>Email Notifications</td><td>On / Off</td><td>On</td><td>Master toggle for notification alerts</td></tr>
+      <tr><td>Sync Frequency</td><td>15 min / 30 min / 1 hour / Manual</td><td>15 min</td><td>Background polling interval</td></tr>
+      <tr><td>Per-account channels</td><td>—</td><td>—</td><td>Separate notification channel per account; configure sound & vibration</td></tr>
+    </table>
+
+    <h3>Accounts</h3>
+    <ul>
+      <li>Lists all signed-in accounts with email and provider icon</li>
+      <li>Shows re-auth indicators when tokens need refreshing</li>
+      <li>Add Account (Google / Microsoft / IMAP)</li>
+      <li>Sign Out per account or Sign Out All</li>
+    </ul>
+
+    <h3>Privacy & Security</h3>
+    <table>
+      <tr><th>Setting</th><th>Options</th><th>Default</th><th>Description</th></tr>
+      <tr><td>Load Remote Images</td><td>On / Off</td><td>On</td><td>Block external images in email bodies</td></tr>
+      <tr><td>Render Markdown</td><td>On / Off</td><td>Off</td><td>Render markdown in plain-text emails</td></tr>
+      <tr><td>PGP Keys</td><td>(navigate)</td><td>—</td><td>Manage OpenPGP encryption keys</td></tr>
+    </table>
+
+    <h3>Support</h3>
+    <table>
+      <tr><th>Action</th><th>Destination</th></tr>
+      <tr><td>Ko-fi</td><td>Donate via Ko-fi</td></tr>
+      <tr><td>UPI</td><td>Copy UPI ID to clipboard</td></tr>
+      <tr><td>Crypto</td><td>Copy crypto wallet address</td></tr>
+      <tr><td>Star on GitHub</td><td>Open repo in browser</td></tr>
+      <tr><td>Discord</td><td>Open Discord invite</td></tr>
+      <tr><td>Share</td><td>Share app link</td></tr>
+      <tr><td>Report Issue</td><td>Open GitHub Issues page</td></tr>
+    </table>
+
+    <h3>About</h3>
+    <table>
+      <tr><th>Item</th><th>Description</th></tr>
+      <tr><td>Version</td><td>Reads from PackageManager (dynamic, not hardcoded)</td></tr>
+      <tr><td>Build Info</td><td>Product flavor + build type</td></tr>
+      <tr><td>Push Status</td><td>Whether FCM push is active</td></tr>
+      <tr><td>Check for Updates</td><td>Queries GitHub API for latest release</td></tr>
+      <tr><td>Privacy Policy</td><td>Opens in Markwon renderer or external browser</td></tr>
+      <tr><td>Terms of Service</td><td>Opens in Markwon renderer or external browser</td></tr>
+      <tr><td>License</td><td>GPL v3.0</td></tr>
+    </table>
+
+    <div class="docs-nav">
+      <a href="/docs/notifications">← Notifications</a>
+      <a href="/docs/architecture">Architecture →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

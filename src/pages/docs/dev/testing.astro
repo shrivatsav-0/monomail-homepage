@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const unitTest = `// Coroutine rule
+@get:Rule
+val mainDispatcherRule = MainDispatcherRule()
+
+// Test ViewModel
+@Test
+fun \`load inbox returns threads\`() = runTest {
+    val repo = mock<EmailRepository>()
+    whenever(repo.getInboxThreadsFlow(any())).thenReturn(flowOf(listOf(thread)))
+    val vm = InboxViewModel(repo, ..., settings)
+
+    advanceUntilIdle()
+
+    assertThat(vm.state.value).isInstanceOf(InboxState.Success::class.java)
+    assertEquals(1, (vm.state.value as InboxState.Success).threads.size)
+}`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | Testing"
+  description="MonoMail testing — unit tests, instrumentation tests, debugging, and manual testing checklist."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Testing</h2>
+
+    <h3>Unit tests</h3>
+    <p>Unit tests use JUnit 4 + Kotlin Coroutines test. Run with:</p>
+    <pre><code>./gradlew test</code></pre>
+
+    <p>Key testing patterns:</p>
+    <pre set:html={`<code>${esc(unitTest)}</code>`}></pre>
+
+    <h3>Instrumentation tests</h3>
+    <pre><code>./gradlew connectedGithubDebugAndroidTest</code></pre>
+
+    <h3>Debugging</h3>
+
+    <h4>Logging</h4>
+    <table>
+      <tr><th>Tag</th><th>Area</th></tr>
+      <tr><td><code>AuthManager</code></td><td>Auth flow, sign-in/out</td></tr>
+      <tr><td><code>EmailRepository</code></td><td>Data layer operations</td></tr>
+      <tr><td><code>InboxViewModel</code></td><td>Inbox state</td></tr>
+      <tr><td><code>EmailDetailViewModel</code></td><td>Detail view state</td></tr>
+      <tr><td><code>ActionQueueManager</code></td><td>Pending action processing</td></tr>
+      <tr><td><code>RetrofitClient</code></td><td>HTTP request logging (debug builds only)</td></tr>
+    </table>
+
+    <h4>Debug commands</h4>
+    <pre><code># View logs for a specific tag
+adb logcat -s InboxViewModel
+
+# Check database contents
+adb shell run-as com.shrivatsav.monomail
+cd databases
+# DB is encrypted — use Room's database inspector in Android Studio
+
+# Check DataStore
+adb shell run-as com.shrivatsav.monomail
+cd shared_prefs</code></pre>
+
+    <h4>Navigation debugging</h4>
+    <p>The <code>BuildConfig.DEBUG</code> flag sets the start destination directly to <code>Screen.SignIn</code> (skipping the welcome screen) for faster iteration. There's also a <code>Screen.SampleCompose</code> route (debug only) for previewing the compose screen.</p>
+
+    <h4>Crash handling</h4>
+    <p>Production crashes are captured by <code>CrashHandler</code> and displayed in <code>CrashActivity</code>. The stack trace is saved to <code>&#123;cacheDir&#125;/last_crash.txt</code>.</p>
+
+    <h3>Manual testing checklist</h3>
+    <p>Before submitting a PR:</p>
+    <ul>
+      <li><code>./gradlew assembleGithubDebug</code> builds</li>
+      <li><code>./gradlew test</code> passes</li>
+      <li>Sign in with Google (playstore flavor)</li>
+      <li>Sign in with Microsoft</li>
+      <li>Sign in with IMAP</li>
+      <li>Load inbox threads</li>
+      <li>Open thread detail</li>
+      <li>Star / unstar thread</li>
+      <li>Swipe actions</li>
+      <li>Compose and send email</li>
+      <li>Multi-account switching</li>
+      <li>Unified inbox</li>
+      <li>Settings changes persist</li>
+    </ul>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/adding-feature">← Adding a Feature</a>
+      <a href="/docs/dev/ci-cd">CI/CD →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Developer Guide"
+  description="MonoMail developer guide — architecture, modules, build system, testing, and contribution workflow."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-hub">
+    <h2>Developer Guide</h2>
+    <p class="subtitle">For developers contributing to or extending MonoMail.</p>
+
+    <div class="docs-grid">
+      <a href="/docs/dev/setup" class="docs-card">
+        <h3>Setup</h3>
+        <p>Prerequisites, first build, and IDE configuration.</p>
+      </a>
+      <a href="/docs/dev/architecture" class="docs-card">
+        <h3>Architecture Patterns</h3>
+        <p>Offline-first design, reactive data flow, provider pattern.</p>
+      </a>
+      <a href="/docs/dev/modules" class="docs-card">
+        <h3>Multi-Module Deep Dive</h3>
+        <p>Module structure, dependency graph, and flavor distribution.</p>
+      </a>
+      <a href="/docs/dev/data-layer" class="docs-card">
+        <h3>Data Layer</h3>
+        <p>Room database, EmailRepository, ActionQueueManager, settings.</p>
+      </a>
+      <a href="/docs/dev/ui-layer" class="docs-card">
+        <h3>UI Layer</h3>
+        <p>Screen architecture, ViewModels, Compose patterns, theme tokens.</p>
+      </a>
+      <a href="/docs/dev/di" class="docs-card">
+        <h3>Dependency Injection</h3>
+        <p>Hilt modules, singleton providers, cross-module injection.</p>
+      </a>
+      <a href="/docs/dev/build-system" class="docs-card">
+        <h3>Build System & Flavors</h3>
+        <p>Version catalog, flavor dimensions, ProGuard rules.</p>
+      </a>
+      <a href="/docs/dev/adding-feature" class="docs-card">
+        <h3>Adding a Feature</h3>
+        <p>Step-by-step guide for creating a new feature module.</p>
+      </a>
+      <a href="/docs/dev/testing" class="docs-card">
+        <h3>Testing</h3>
+        <p>Unit tests, instrumentation tests, manual testing checklist.</p>
+      </a>
+      <a href="/docs/dev/ci-cd" class="docs-card">
+        <h3>CI/CD & Releases</h3>
+        <p>Pipeline workflow, secrets, versioning, release process.</p>
+      </a>
+      <a href="/docs/dev/style-guide" class="docs-card">
+        <h3>Style Guide & Pitfalls</h3>
+        <p>Coding conventions, commit format, common mistakes.</p>
+      </a>
+    </div>
+
+    <p style="margin-top: 32px; font-size: 14px;">
+      <a href="/docs" style="color: var(--text-muted);">← User Documentation</a>
+    </p>
+  </div>
+
+  <Footer />
+</BaseLayout>

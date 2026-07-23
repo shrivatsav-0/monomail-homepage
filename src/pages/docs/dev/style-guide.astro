@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const fileStruct = `ScreenName.kt   # Composable(s) at top
+ViewModelName.kt # ViewModel at top`;
+
+const composableNaming = `@Composable
+fun InboxScreen(
+    viewModel: InboxViewModel = hiltViewModel(),
+    onNavigateToCompose: () -> Unit,
+    onNavigateToThread: (String) -> Unit,
+    onNavigateToSettings: () -> Unit
+)`;
+
+const stateNaming = `sealed class ScreenState {
+    data object Loading : ScreenState()
+    data class Success(...) : ScreenState()
+    data class Error(val message: String) : ScreenState()
+}
+
+// ViewModel
+private val _state = MutableStateFlow<ScreenState>(ScreenState.Loading)
+val state: StateFlow<ScreenState> = _state.asStateFlow()`;
+
+const commitMsg = `type(scope): short summary (max 72 chars)
+
+Longer explanation if needed. Wrap at 72 chars.`;
+
+const flavorSrc = `src/github/java/.../GoogleAuthHelperImpl.kt     // github variant
+src/playstore/java/.../GoogleAuthHelperImpl.kt  // playstore variant`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | Style Guide & Pitfalls"
+  description="MonoMail coding conventions, commit format, and common pitfalls to avoid."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Style Guide</h2>
+
+    <h3>Kotlin</h3>
+    <ul>
+      <li>Follow <a href="https://kotlinlang.org/docs/coding-conventions.html" target="_blank">Kotlin Coding Conventions</a>.</li>
+      <li>Run <code>./gradlew ktlintCheck</code> before committing.</li>
+      <li>No Hungarian notation.</li>
+    </ul>
+
+    <h3>File structure</h3>
+    <pre set:html={`<code>${esc(fileStruct)}</code>`}></pre>
+    <p>One screen = one file. One ViewModel = one file. Exceptions for small related composables within the same file.</p>
+
+    <h3>Package naming</h3>
+    <ul>
+      <li>Feature modules: <code>com.shrivatsav.monomail.feature.&#123;featurename&#125;</code></li>
+      <li>Core modules: <code>com.shrivatsav.monomail.core.&#123;modulename&#125;</code></li>
+      <li>Sub-packages match the module's internal structure (e.g., <code>feature.settings.pgp</code>, <code>core.data.auth</code>)</li>
+    </ul>
+
+    <h3>Composable naming</h3>
+    <pre set:html={`<code>${esc(composableNaming)}</code>`}></pre>
+    <ul>
+      <li>All composables are PascalCase.</li>
+      <li>Navigation callbacks prefixed with <code>onNavigateTo</code>.</li>
+      <li>All other callbacks follow <code>on&#123;Action&#125;</code> naming.</li>
+    </ul>
+
+    <h3>State naming</h3>
+    <pre set:html={`<code>${esc(stateNaming)}</code>`}></pre>
+
+    <h3>Commit messages</h3>
+    <pre set:html={`<code>${esc(commitMsg)}</code>`}></pre>
+    <p>Types: <code>fix</code>, <code>feat</code>, <code>refactor</code>, <code>chore</code>, <code>docs</code>, <code>test</code>, <code>style</code>.</p>
+    <p>Scopes: <code>inbox</code>, <code>detail</code>, <code>compose</code>, <code>settings</code>, <code>auth</code>, <code>data</code>, <code>push</code>, <code>pgp</code>, <code>ci</code>, etc.</p>
+
+    <hr />
+
+    <h2>Common Pitfalls</h2>
+
+    <h3>1. Mixing up module namespaces</h3>
+    <p>Each module has its own <code>namespace</code>. A module can only see classes from its declared dependencies. Add a <code>project(":core:xyz")</code> dependency if you need cross-module access.</p>
+
+    <h3>2. Flavor mismatch</h3>
+    <p>If a module doesn't have flavor-specific variations but the app does, you may get <code>variant missing</code> errors. Solution: add the flavor dimension with empty product flavors to every module.</p>
+
+    <h3>3. Missing flavor source set</h3>
+    <p>When adding flavor-specific files, put them in the correct source set:</p>
+    <pre set:html={`<code>${esc(flavorSrc)}</code>`}></pre>
+
+    <h3>4. HiltWorker without KSP</h3>
+    <p>WorkManager workers with Hilt injection need <code>libs.hilt.work</code> and <code>libs.hilt.work.compiler</code> (KSP). The App class must implement <code>Configuration.Provider</code>.</p>
+
+    <h3>5. Database migration failures</h3>
+    <p>When changing the schema, create a new <code>MIGRATION_X_Y</code> constant in <code>AppDatabase.kt</code>. Test against a device with populated data. <code>fallbackToDestructiveMigration(true)</code> is set as safety net but will wipe user data.</p>
+
+    <h3>6. WebView leaks in Compose</h3>
+    <p>Always dispose properly with <code>DisposableEffect</code> — call <code>webView.removeAllViews()</code> and <code>webView.destroy()</code> in <code>onDispose</code>.</p>
+
+    <h3>7. Gson serialization with ProGuard</h3>
+    <p>Data classes used with Gson must be kept in ProGuard rules, or you'll get empty objects in release builds.</p>
+
+    <h3>8. Release build credentials</h3>
+    <p>Release builds require <code>secrets.properties</code> and <code>keystore.properties</code> in the project root. These are not committed. CI provides them from stored secrets.</p>
+
+    <h3>9. ActionQueueManager not started</h3>
+    <p><code>ActionQueueManager.start()</code> must be called from <code>MonoMailApp.onCreate()</code>. If pending actions aren't being processed, check that it's injected and started.</p>
+
+    <h3>10. Multiple Compose BOM versions</h3>
+    <p>All Compose dependencies across all modules must use the same BOM version. Always import via <code>platform(libs.androidx.compose.bom)</code>.</p>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/ci-cd">← CI/CD</a>
+      <a href="/docs/dev">Back to Dev Guide</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

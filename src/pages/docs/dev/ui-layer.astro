@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
+
+const screenArch = `{Screen}Screen.kt
+  ├── @Composable fun {Screen}Screen(viewModel, navCallbacks)
+  │     └── Collects state: val state by viewModel.state.collectAsState()
+  │     └── Renders based on sealed class state
+  │
+  └── @HiltViewModel
+      class {Screen}ViewModel @Inject constructor(
+          private val repository: EmailRepository,
+          private val settingsDataStore: SettingsDataStore,
+          savedStateHandle: SavedStateHandle
+      ) : ViewModel()`;
+
+const statePattern = `sealed class InboxState {
+    data object Loading : InboxState()
+    data class Success(
+        val threads: List<EmailThread>,
+        val currentTab: InboxTab,
+        val isRefreshing: Boolean,
+        val isLoadingMore: Boolean,
+        val nextPageToken: String?
+    ) : InboxState()
+    data class Error(val message: String) : InboxState()
+}`;
+
+const stateDerivation = `// Combine multiple reactive sources
+val state: StateFlow<InboxState> = combine(
+    currentTab,
+    activeAccountId,
+    unifiedInboxEnabled,
+    organizeByThread
+) { tab, accountId, unified, threaded ->
+    // Derive query parameters, return InboxState
+}.flatMapLatest { params ->
+    // Switch between different Room queries based on params
+    when (params.tab) {
+        InboxTab.INBOX -> repository.getInboxThreadsFlow(params.accountId)
+        // ...
+    }
+}.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), InboxState.Loading)`;
+
+const oneShotEvents = `private val _events = MutableSharedFlow<InboxEvent>()
+val events: SharedFlow<InboxEvent> = _events.asSharedFlow()`;
+
+const themeTokens = `Monochrome palette:
+  Light:  Background #FFFFFF, Surface #FAFAFA, SurfaceContainer #F3F3F3
+  Dark:   Background #000000, Surface #0D0D0D, SurfaceContainer #141414
+  Primary: Black (light) / White (dark)
+  OnSurfaceMuted: #5C5C5C (light) / #A0A0A0 (dark)
+
+Shapes:
+  extraSmall: 8dp, small: 12dp, medium: 16dp, large: 24dp, extraLarge: 32dp
+
+Typography:
+  Google Sans Rounded (W500 display, W600 headlines/titles, W400 body, W500 labels)`;
+
+const esc = (s: string) => s.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+---
+
+<BaseLayout
+  title="Monomail | UI Layer"
+  description="MonoMail UI layer — screen architecture, ViewModels, Compose patterns, and theme tokens."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>UI Layer</h2>
+
+    <h3>Screen architecture</h3>
+    <p>Each screen follows this pattern:</p>
+    <pre set:html={`<code>${esc(screenArch)}</code>`}></pre>
+
+    <h3>State pattern</h3>
+    <p>ViewModels expose a single <code>StateFlow</code> of a sealed class:</p>
+    <pre set:html={`<code>${esc(statePattern)}</code>`}></pre>
+
+    <h3>ViewModel patterns</h3>
+
+    <h4>Complex state derivation (InboxViewModel)</h4>
+    <pre set:html={`<code>${esc(stateDerivation)}</code>`}></pre>
+
+    <h4>One-shot events</h4>
+    <pre set:html={`<code>${esc(oneShotEvents)}</code>`}></pre>
+
+    <h3>Composable patterns</h3>
+    <ul>
+      <li><strong>Dumb composables:</strong> Screens receive data and callbacks only. No business logic.</li>
+      <li><strong>State hoisting:</strong> All mutable state lives in the ViewModel.</li>
+      <li><strong>AnimatedVisibility</strong> for expand/collapse sections (Cc/Bcc, smart grouping sub-settings, undo window).</li>
+      <li><strong><code>animateContentSize</code></strong> with spring physics on cards and sections.</li>
+      <li><strong><code>graphicsLayer(scaleX/Y)</code></strong> for press-scale animations.</li>
+      <li><strong><code>updateTransition</code></strong> for dock tab animated state changes.</li>
+    </ul>
+
+    <h3>Theme tokens</h3>
+    <pre set:html={`<code>${esc(themeTokens)}</code>`}></pre>
+
+    <div class="docs-nav">
+      <a href="/docs/dev/data-layer">← Data Layer</a>
+      <a href="/docs/dev/di">Dependency Injection →</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

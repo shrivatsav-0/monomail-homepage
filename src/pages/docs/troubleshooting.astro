@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Monomail | Troubleshooting & FAQ"
+  description="Common MonoMail issues and how to fix them."
+  pageClass="page-docs"
+>
+  <Nav />
+
+  <div class="docs-content">
+    <h2>Troubleshooting & FAQ</h2>
+
+    <h3>"This app is blocked" error on Google sign-in</h3>
+    <p>The Gmail API uses OAuth verification, limited to <strong>100 test users</strong>. If you're beyond user 100, you'll see this error. Solutions:</p>
+    <ol>
+      <li><strong>Run from source</strong> with your own Google Cloud project credentials.</li>
+      <li><strong>Use Outlook</strong> — no such quota limit.</li>
+      <li><strong>Use IMAP/SMTP</strong> — works with any provider.</li>
+    </ol>
+
+    <h3>Google sign-in says "No Google account found"</h3>
+    <p>Ensure you have a Google account added on your device: <strong>Settings → Accounts → Add account → Google</strong>. Then restart MonoMail.</p>
+
+    <h3>Microsoft sign-in fails</h3>
+    <ul>
+      <li>Ensure you have a Microsoft account.</li>
+      <li>The MSAL configuration uses browser-based auth (not Microsoft Authenticator). Make sure you have a web browser installed.</li>
+      <li>Try restarting the sign-in flow.</li>
+    </ul>
+
+    <h3>Notifications aren't working</h3>
+    <ol>
+      <li>Check that <strong>Email Notifications</strong> is enabled in Settings → Notifications.</li>
+      <li>Check that <strong>POST_NOTIFICATIONS</strong> permission is granted (Android 13+).</li>
+      <li>If using the GitHub build, push is disabled — notifications rely on periodic polling (15 min minimum).</li>
+      <li>Check the <strong>Sync Frequency</strong> setting — if set to "Manual", no background polling occurs.</li>
+    </ol>
+
+    <h3>Can't connect to IMAP/SMTP server</h3>
+    <ol>
+      <li>Verify your server addresses (host, port).</li>
+      <li>Check SSL/TLS settings:
+        <ul>
+          <li>IMAP: usually port 993 with SSL, or 143 with STARTTLS</li>
+          <li>SMTP: usually port 465 with SSL, or 587 with STARTTLS</li>
+        </ul>
+      </li>
+      <li>Run the connection test before saving.</li>
+      <li>If using a Gmail/Outlook preset, the settings are pre-filled — but you'll need an app password for Gmail if 2FA is enabled.</li>
+    </ol>
+
+    <h3>Where are my scheduled messages?</h3>
+    <p>Tap the calendar badge in the inbox search bar. This opens the Scheduled Messages screen showing all pending sends.</p>
+
+    <h3>Why is the GitHub build different from the Play Store build?</h3>
+    <p>The GitHub build excludes the developer's Google OAuth credentials for security. It also has push notifications disabled (no FCM on open-source distribution). Outlook/IMAP work identically in both builds.</p>
+
+    <h3>App feels slow on older devices?</h3>
+    <ul>
+      <li>Disable <strong>Smart Grouping</strong> in Settings → Inbox</li>
+      <li>Reduce animation complexity by using fewer dock tabs</li>
+      <li>Consider using fewer accounts (see performance warning when adding 4th+)</li>
+    </ul>
+
+    <div class="docs-nav">
+      <a href="/docs/architecture">← Architecture</a>
+      <a href="/docs">Back to Docs</a>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
